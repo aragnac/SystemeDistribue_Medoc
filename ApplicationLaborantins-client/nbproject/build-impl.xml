@@ -769,8 +769,12 @@ exists or setup the property manually. For example like this:
             </condition>
         </fail>
     </target>
-    <target depends="init" if="no.dist.ear.dir" name="-deps-module-jar" unless="no.deps"/>
-    <target depends="init" if="dist.ear.dir" name="-deps-ear-jar" unless="no.deps"/>
+    <target depends="init" if="no.dist.ear.dir" name="-deps-module-jar" unless="no.deps">
+        <ant antfile="${project.JavaCLibAnalyses}/build.xml" inheritall="false" target="jar"/>
+    </target>
+    <target depends="init" if="dist.ear.dir" name="-deps-ear-jar" unless="no.deps">
+        <ant antfile="${project.JavaCLibAnalyses}/build.xml" inheritall="false" target="jar"/>
+    </target>
     <target depends="init, -check-main-class, -deps-module-jar, -deps-ear-jar" name="deps-jar"/>
     <target depends="init,deps-jar" name="-pre-pre-compile">
         <mkdir dir="${classes.dir}"/>
@@ -780,16 +784,16 @@ exists or setup the property manually. For example like this:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="compile" if="is.server.weblogic" name="library-inclusion-in-archive">
-        <basename file="${libs.MySQLDriver.classpath}" property="manifest.libs.MySQLDriver.classpath"/>
+        <basename file="${reference.JavaCLibAnalyses.jar}" property="manifest.reference.JavaCLibAnalyses.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
             <attribute name="Extension-List" value="jar-1 "/>
-            <attribute name="jar-1-Extension-Name" value="${manifest.libs.MySQLDriver.classpath}"/>
+            <attribute name="jar-1-Extension-Name" value="${manifest.reference.JavaCLibAnalyses.jar}"/>
         </manifest>
     </target>
     <target depends="compile" if="dist.ear.dir" name="library-inclusion-in-manifest">
-        <copyfiles files="${libs.MySQLDriver.classpath}" manifestproperty="manifest.libs.MySQLDriver.classpath" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${reference.JavaCLibAnalyses.jar}" manifestproperty="manifest.reference.JavaCLibAnalyses.jar" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.libs.MySQLDriver.classpath} lib/${manifest.libs.MySQLDriver.classpath} "/>
+            <attribute name="Class-Path" value="${manifest.reference.JavaCLibAnalyses.jar} lib/${manifest.reference.JavaCLibAnalyses.jar} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">
@@ -1292,7 +1296,9 @@ exists or setup the property manually. For example like this:
                 CLEANUP SECTION
                 ===============
             -->
-    <target depends="init" name="deps-clean" unless="no.deps"/>
+    <target depends="init" name="deps-clean" unless="no.deps">
+        <ant antfile="${project.JavaCLibAnalyses}/build.xml" inheritall="false" target="clean"/>
+    </target>
     <target depends="init" name="-do-clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>

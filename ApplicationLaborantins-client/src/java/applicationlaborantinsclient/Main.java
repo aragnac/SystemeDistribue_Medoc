@@ -5,9 +5,11 @@
  */
 package applicationlaborantinsclient;
 
+import AnalyseRemote.AnalyseSBRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
@@ -24,6 +26,9 @@ import javax.jms.Topic;
  */
 public class Main {
 
+    @EJB
+    private static AnalyseSBRemote analyseSB;
+    
     @Resource(mappedName = "jms/analyseTopic")
     private static Topic analyseTopic;
 
@@ -47,12 +52,23 @@ public class Main {
             connection = analyseTopicFactory.createConnection();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             connection.start();
+            
+            //Run login frame
+            Login login = new Login();
+            login.setVisible(true);
+            
+            //login.dispose();
+            
+            //Run mainframe
+            Resultats result = new Resultats(analyseTopic, session, connection, analyseSB);
+            result.setVisible(true);
+            
         }catch(JMSException ex){
             
         }
     }
 
-    private Message createJMSMessageForjmsAnalyseQueue(Session session, Object messageData) throws JMSException {
+    /*private Message createJMSMessageForjmsAnalyseQueue(Session session, Object messageData) throws JMSException {
         // TODO create and populate message to send
         TextMessage tm = session.createTextMessage();
         tm.setText(messageData.toString());
@@ -79,7 +95,7 @@ public class Main {
                 connection.close();
             }
         }
-    }
+    }*/
 
     /*private Message createJMSMessageForjmsAnalyseTopic(Session session, Object messageData) throws JMSException {
         // TODO create and populate message to send

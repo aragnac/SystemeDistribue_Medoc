@@ -5,9 +5,11 @@
  */
 package applicationlaborantinsclient;
 
+import AnalyseRemote.AnalyseSBRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
@@ -24,6 +26,8 @@ import javax.swing.JOptionPane;
  */
 public class Resultats extends javax.swing.JFrame {
 
+    private static AnalyseSBRemote analyseSB;
+    
     private Topic topic = null;
     private Connection connection = null;
     private Session session = null;
@@ -38,12 +42,13 @@ public class Resultats extends javax.swing.JFrame {
         
     }
     
-    public Resultats(Topic top, Session sess, Connection con) {
+    public Resultats(Topic top, Session sess, Connection con, AnalyseSBRemote analyseBean) {
         initComponents();
         
         topic = top;
         connection = con;
         session = sess;
+        analyseSB = analyseBean;
         
         try{
             producer = session.createProducer(topic);
@@ -168,24 +173,24 @@ public class Resultats extends javax.swing.JFrame {
                                             .addComponent(ana1Label)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(leucocytesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(ana6Label)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ccmhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(ana5Label)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(vgmTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(ana4Label)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hematocritesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hematocritesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(ana2Label)
-                                            .addComponent(ana3Label))
+                                            .addComponent(ana3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hemoglobineTF, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(hemoglobineTF, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ana5Label, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(ana6Label))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(ccmhTF, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                                            .addComponent(vgmTF))))
                                 .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -266,7 +271,8 @@ public class Resultats extends javax.swing.JFrame {
             producer.send(tm);
             
             //Ajout du resultat de l'analyse à la DB
-            
+            analyseSB.insertAnalyse("item", "value", 2);
+            JOptionPane.showMessageDialog(null, "Resultats de l'analyse envoyés.");
         }catch(JMSException ex){
             JOptionPane.showMessageDialog(null, "JMS Error : "+ex.getMessage()); 
         }
@@ -276,6 +282,7 @@ public class Resultats extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -302,6 +309,7 @@ public class Resultats extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Resultats().setVisible(true);
             }
         });
