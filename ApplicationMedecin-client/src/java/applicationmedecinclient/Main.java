@@ -8,6 +8,7 @@ package applicationmedecinclient;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
@@ -16,12 +17,16 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
+import patientRemote.patientSBRemote;
 
 /**
  *
  * @author Nicolas
  */
 public class Main {
+
+    @EJB
+    private static patientSBRemote patientSB;
 
     @Resource(mappedName = "jms/analyseTopic")
     private static Topic analyseTopic;
@@ -33,7 +38,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        searchFrame search = new searchFrame(patientSB);
+        search.setVisible(true);
     }
 
     private Message createJMSMessageForjmsAnalyseTopic(Session session, Object messageData) throws JMSException {
