@@ -5,17 +5,29 @@
  */
 package applicationmedecinclient;
 
+import patientRemote.Patient;
+
 /**
  *
  * @author Nicolas
  */
 public class analysesFrame extends javax.swing.JFrame {
 
+    Patient patient;
+    
     /**
      * Creates new form analysesFrame
      */
     public analysesFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+    
+    public analysesFrame(Patient pat) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        patient = pat;
+        patientLabel.setText(patient.getNom() + " " + patient.getPrenom());
     }
 
     /**

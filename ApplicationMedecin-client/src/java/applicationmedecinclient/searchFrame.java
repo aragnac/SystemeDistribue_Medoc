@@ -8,6 +8,7 @@ package applicationmedecinclient;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.ListModel;
 import patientRemote.Patient;
 import patientRemote.patientSBRemote;
 
@@ -24,10 +25,12 @@ public class searchFrame extends javax.swing.JFrame {
      */
     public searchFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     public searchFrame(patientSBRemote patientBean) {
         initComponents();
+        this.setLocationRelativeTo(null);
         patientSB = patientBean;
         listPanel.setVisible(false);
     }
@@ -48,9 +51,11 @@ public class searchFrame extends javax.swing.JFrame {
         patientsJList = new javax.swing.JList<>();
         searchButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,6 +66,11 @@ public class searchFrame extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        patientsJList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientsJListMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(patientsJList);
 
@@ -87,6 +97,8 @@ public class searchFrame extends javax.swing.JFrame {
             }
         });
 
+        jMenu3.setText("Options");
+
         jMenu1.setText("Connection");
 
         jMenuItem1.setText("Login");
@@ -95,7 +107,12 @@ public class searchFrame extends javax.swing.JFrame {
         jMenuItem2.setText("Logout");
         jMenu1.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenu3.add(jMenu1);
+
+        jMenuItem3.setText("Ajout patient");
+        jMenu3.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Help?");
         jMenuBar1.add(jMenu2);
@@ -112,14 +129,15 @@ public class searchFrame extends javax.swing.JFrame {
                         .addGap(131, 131, 131)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(patientTF, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(searchButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(patientTF, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(searchButton)
+                                .addGap(50, 50, 50)))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,6 +172,15 @@ public class searchFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void patientsJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsJListMouseClicked
+        int index = patientsJList.locationToIndex(evt.getPoint());
+        ListModel dlm = patientsJList.getModel();
+        Patient patient = (Patient) dlm.getElementAt(index);
+        
+        analysesFrame anal = new analysesFrame(patient);
+        anal.setVisible(true);
+    }//GEN-LAST:event_patientsJListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -194,9 +221,11 @@ public class searchFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listPanel;
     private javax.swing.JTextField patientTF;
