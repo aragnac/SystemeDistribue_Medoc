@@ -24,6 +24,7 @@ public class AnalyseSB implements AnalyseSBRemote {
     public boolean insertAnalyse(String item, String value, int ref) {
         boolean exit = false;
         
+        //On passe en parametre de emf le nom de la persitence unit
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -35,7 +36,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             a.setRefPatient(ref);
             em.persist(a);
             em.getTransaction().commit();
-            
+            em.close();
             exit = true;
         }catch(Exception e){
             System.out.println(e.getMessage());

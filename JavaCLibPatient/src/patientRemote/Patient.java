@@ -124,7 +124,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return "patientRemote.Patient[ id=" + id + " ]";
+        return nom + "  " + prenom;
     }
     
 }

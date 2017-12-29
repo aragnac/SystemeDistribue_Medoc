@@ -15,6 +15,6 @@ import javax.ejb.Remote;
 @Remote
 public interface patientSBRemote {
 
-    List<Patient> getPatients(String nom, String prenom);
+    List<patientRemote.Patient> getPatients(String nom, String prenom);
     
 }

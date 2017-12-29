@@ -5,8 +5,8 @@
  */
 package patientRemote;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,18 +18,21 @@ import javax.persistence.TypedQuery;
  * @author Nicolas
  */
 @Stateless
+@DeclareRoles("medecin")
 public class patientSB implements patientSBRemote {
-
+    
     @Override
-    public List<Patient> getPatients(String nom, String prenom) {
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibPatientPU");
+    @RolesAllowed("medecin")
+    public List<patientRemote.Patient> getPatients(String nom, String prenom) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibPatientPU");// JavaCLibPatientPU
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        TypedQuery<Patient> query = em.createQuery(" select * from patient  where nom like '%"+ nom +"%' or prenom LIKE '%"+ prenom +"%'; ", Patient.class);
-        List<Patient> results = query.getResultList();
-        
+        TypedQuery<patientRemote.Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.nom LIKE '%"+ nom +"%' or p.prenom LIKE '%"+ prenom +"%' ", Patient.class); //WHERE nom LIKE '%"+ nom +"%' or prenom LIKE '%"+ prenom +"%'
+        List<patientRemote.Patient> results = query.getResultList();
+
+        em.close();
+
         return results;
     }
 
