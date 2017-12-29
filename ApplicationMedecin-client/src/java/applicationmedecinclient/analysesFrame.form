@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
+              <Component id="patientLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="informationsJPanel" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="patientLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="informationsJPanel" min="-2" pref="297" max="-2" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="patientLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="nom patient"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JTabbedPane" name="informationsJPanel">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="R&#xe9;sultats">
+                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;sultats"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel5" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" pref="259" max="32767" attributes="0"/>
+                          <Component id="jPanel5" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="jList1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                      <StringArray count="5">
+                        <StringItem index="0" value="Item 1"/>
+                        <StringItem index="1" value="Item 2"/>
+                        <StringItem index="2" value="Item 3"/>
+                        <StringItem index="3" value="Item 4"/>
+                        <StringItem index="4" value="Item 5"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel5">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="ana6Label1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana5Label1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="vgmLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="ccmhLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="ana3Label1" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="ana2Label1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana1Label1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="ana4Label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="hematocritesLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="hematiesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="leutocytesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ana8Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ana7Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ana10Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="hemoglobineLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="ana9Label" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tcmhLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="vihLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="globulesBlancLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="171" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana1Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana7Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="leutocytesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tcmhLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana2Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana8Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hematiesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vihLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana3Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana9Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hemoglobineLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="globulesBlancLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana4Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana10Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hematocritesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana5Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vgmLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana6Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ccmhLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="ana10Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel12"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana6Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C.C.M.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana1Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Leucocytes :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana2Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;maties :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana3Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;moglobine :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana7Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="T.C.M.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana4Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;matocrites :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana8Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="V.I.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana5Label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="V.G.M :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana9Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Globules Blancs :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="leutocytesLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="leutocytes"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="hematiesLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="hematies"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="hemoglobineLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="hematocritesLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="vgmLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ccmhLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tcmhLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="vihLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="globulesBlancLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel9"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel10">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel10"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Analyses">
+                <Property name="tabTitle" type="java.lang.String" value="Analyses"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="ana3Label" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="ana6Label" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana5Label" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="ana2Label" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ana1Label" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="ana4Label" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="vgmCB" min="-2" max="-2" attributes="0"/>
+                              <Component id="hematocritesCB" min="-2" max="-2" attributes="0"/>
+                              <Component id="ccmhCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="hemoglobineCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="leucocytesCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="hematiesCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="111" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="newAnalyseButton" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tcmhLab" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="vihLab" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdwLab" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="globulesBlancLab" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tcmhCB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="vihCB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdwCB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="globulesBlancCB" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="162" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tcmhLab" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="leucocytesCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tcmhCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ana2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hematiesCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vihLab" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vihCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ana3Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="hemoglobineCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ana4Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="hematocritesCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ana5Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="vgmCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ana6Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ccmhCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="rdwLab" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdwCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="globulesBlancLab" min="-2" max="-2" attributes="0"/>
+                                      <Component id="globulesBlancCB" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="44" max="32767" attributes="0"/>
+                          <Component id="newAnalyseButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="globulesBlancLab">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Globules blanc :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana6Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C.C.M.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana1Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Leucocytes :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana2Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;maties :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana3Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;moglobine :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tcmhLab">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="T.C.M.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana4Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#xe9;matocrites :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="vihLab">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="V.I.H :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ana5Label">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="V.G.M :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="rdwLab">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="RDW :"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="leucocytesCB">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="hematiesCB">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="hemoglobineCB">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="hematocritesCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hematocritesCBActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="vgmCB">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="ccmhCB">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="tcmhCB">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="vihCB">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jCheckBox2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="rdwCB">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jCheckBox3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="globulesBlancCB">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jCheckBox4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="newAnalyseButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nouvelle Analyse"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Informations">
+                <Property name="tabTitle" type="java.lang.String" value="Informations"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="adresseLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="prenomLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="nomLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTextField1" alignment="0" pref="100" max="32767" attributes="0"/>
+                          <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="268" max="32767" attributes="0"/>
+                      <Component id="modifyButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nomLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="prenomLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="adresseLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <Component id="modifyButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="nomLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nom :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="prenomLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Prenom :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="adresseLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adresse :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField1">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField2">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField3">
+            </Component>
+            <Component class="javax.swing.JButton" name="modifyButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modifier"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
