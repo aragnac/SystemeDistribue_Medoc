@@ -6,30 +6,23 @@
 package AnalyseRemote;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSConnectionFactory;
-import javax.jms.JMSContext;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
-import javax.jms.QueueConnectionFactory;
 import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.swing.event.EventListenerList;
 
 /**
  *
@@ -38,11 +31,17 @@ import javax.swing.event.EventListenerList;
 @Stateless
 public class AnalyseSB implements AnalyseSBRemote {
 
+    /*@PersistenceContext(unitName="JavaCLibAnalysesPU")
+    private EntityManager em;*/
+    @Resource SessionContext ctx;
+    
     @Resource(mappedName = "jms/analyseQueue")
     private Queue analyseQueue;
 
     @Resource(mappedName = "jms/analyseQueueFactory")
     private ConnectionFactory factory;
+    
+    //EntityManagerFactory emf = null;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -50,7 +49,7 @@ public class AnalyseSB implements AnalyseSBRemote {
     
     
     @Override
-    public boolean insertAnalyse(String item, String value, int ref) {
+    public boolean insertAnalyse(Analyses anal) {
         boolean exit = false;
         
         //On passe en parametre de emf le nom de la persitence unit
@@ -58,12 +57,14 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        try{  
-            AnalyseRemote.Analyses a = new Analyses();
-            a.setItem(item);
-            a.setValeur(value);
-            a.setRefPatient(ref);
-            em.persist(a);
+        System.out.println(anal.getDateAnalyse());
+        System.out.println(anal.getRefDemande());
+        System.out.println(anal.getRefPatient());
+        System.out.println(anal.getItem());
+        System.out.println("valeur : " + anal.getValeur());
+        
+        try{
+            em.persist(anal);
             em.getTransaction().commit();
             em.close();
             exit = true;
@@ -91,6 +92,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             em.persist(demande);
             em.getTransaction().commit();
             ref = demande.getId();
+            System.out.println("reference :" + ref);
             em.close();
             
             sendJMSMessageToAnalyseQueue(demande);
@@ -106,14 +108,18 @@ public class AnalyseSB implements AnalyseSBRemote {
     
         List<Demande> results = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d WHERE d.traitee = false ", Demande.class);
-        results = query.getResultList();
+            TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d WHERE d.traitee = false ", Demande.class);
+            results = query.getResultList();
 
-        em.close();
+            em.close();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
 
         return results;
     }
@@ -123,15 +129,19 @@ public class AnalyseSB implements AnalyseSBRemote {
     
         List<Analyses> results = new ArrayList<>();
 
-        EntityManagerFactory emf;
-        emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        TypedQuery<Analyses> query = em.createQuery("SELECT a FROM Analyses a ", Analyses.class);
-        results = query.getResultList();
+            TypedQuery<Analyses> query = em.createQuery("SELECT a FROM Analyses a WHERE a.refDemande = "+ refDemande +"", Analyses.class);
+            results = query.getResultList();
 
-        em.close();
+            em.close();
+        
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
 
         return results;
     }
@@ -155,11 +165,11 @@ public class AnalyseSB implements AnalyseSBRemote {
         }
     }
     
-
-    /*private void sendJMSMessageToAnalyseQueue(Object messageData) {
-
-        context.createProducer().send(analyseQueue, (Message) messageData);
-        System.out.println("Message envoye sur la queue");
+   /* private EntityManagerFactory getEntityManagerFactory() {
+        if (emf == null) {
+            emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
+        }
+        return emf;
     }*/
     
 }

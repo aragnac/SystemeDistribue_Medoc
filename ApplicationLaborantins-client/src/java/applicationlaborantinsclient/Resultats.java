@@ -6,13 +6,16 @@
 package applicationlaborantinsclient;
 
 import AnalyseRemote.AnalyseSBRemote;
+import AnalyseRemote.Analyses;
 import AnalyseRemote.Demande;
+import java.util.List;
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,8 +30,8 @@ public class Resultats extends javax.swing.JFrame {
     private Connection connection = null;
     private Session session = null;
     private Demande demande = null;
-    
     private MessageProducer producer = null;
+    private DefaultListModel dlm;
 
     /**
      * Creates new form Resultats
@@ -45,12 +48,23 @@ public class Resultats extends javax.swing.JFrame {
         session = sess;
         analyseSB = analyseBean;
         demande = dem;
+        dlm = new DefaultListModel();
         
         try{
             producer = session.createProducer(topic);
+            demandeLabel.setText(Integer.toString(demande.getId()));
+            medecinLabel.setText(Integer.toString(demande.getRefMedecin()));
+            
+            List<Analyses> a = analyseSB.getAnalyses(demande.getId());
+
+            for(int i = 0; i < a.size(); i++)
+            {
+                dlm.addElement(a.get(i));
+            }
+            analysesJList.setModel(dlm);
         }
         catch(JMSException ex){
-          JOptionPane.showMessageDialog(null, "JMS Error : "+ex.getMessage());  
+          JOptionPane.showMessageDialog(null, "JMS Error : " + ex.getMessage());  
         }
     }
 
@@ -90,7 +104,7 @@ public class Resultats extends javax.swing.JFrame {
         demandeLabel = new javax.swing.JLabel();
         medecinLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        analysesJList = new javax.swing.JList<>();
 
         jLabel2.setText("jLabel2");
 
@@ -156,12 +170,12 @@ public class Resultats extends javax.swing.JFrame {
 
         medecinLabel.setText("medecin");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        analysesJList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(analysesJList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -344,6 +358,7 @@ public class Resultats extends javax.swing.JFrame {
     private javax.swing.JLabel ana7Label;
     private javax.swing.JLabel ana8Label;
     private javax.swing.JLabel ana9Label;
+    private javax.swing.JList<String> analysesJList;
     private javax.swing.JTextField ccmhTF;
     private javax.swing.JLabel demandeLabel;
     private javax.swing.JTextField hematiesTF;
@@ -351,7 +366,6 @@ public class Resultats extends javax.swing.JFrame {
     private javax.swing.JTextField hemoglobineTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField9;

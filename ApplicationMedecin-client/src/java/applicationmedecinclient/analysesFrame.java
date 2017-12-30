@@ -6,8 +6,11 @@
 package applicationmedecinclient;
 
 import AnalyseRemote.AnalyseSBRemote;
+import AnalyseRemote.Analyses;
 import java.util.Calendar;
 import AnalyseRemote.Demande;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import patientRemote.Patient;
 
@@ -19,6 +22,8 @@ public class analysesFrame extends javax.swing.JFrame {
 
     private static AnalyseSBRemote analyseSB;
     private Patient patient;
+    private List<Analyses> listeAnalyses;
+    private Analyses anal;
     
     /**
      * Creates new form analysesFrame
@@ -31,9 +36,17 @@ public class analysesFrame extends javax.swing.JFrame {
     public analysesFrame(Patient pat, AnalyseSBRemote analyseBean) {
         initComponents();
         this.setLocationRelativeTo(null);
+        
         patient = pat;
         analyseSB = analyseBean;
         patientLabel.setText(patient.getNom() + " " + patient.getPrenom());
+        
+        listeAnalyses = new ArrayList<>();
+        anal = new Analyses();
+        Calendar cal = Calendar.getInstance();
+        anal.setDateAnalyse(cal.getTime());
+        anal.setRefPatient(pat.getId());
+        anal.setValeur("-");
     }
 
     /**
@@ -285,19 +298,41 @@ public class analysesFrame extends javax.swing.JFrame {
 
         rdwLab.setText("RDW :");
 
+        leucocytesCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leucocytesCBActionPerformed(evt);
+            }
+        });
+
+        hematiesCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hematiesCBActionPerformed(evt);
+            }
+        });
+
+        hemoglobineCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hemoglobineCBActionPerformed(evt);
+            }
+        });
+
         hematocritesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hematocritesCBActionPerformed(evt);
             }
         });
 
-        tcmhCB.setText("jCheckBox1");
+        vgmCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vgmCBActionPerformed(evt);
+            }
+        });
 
-        vihCB.setText("jCheckBox2");
-
-        rdwCB.setText("jCheckBox3");
-
-        globulesBlancCB.setText("jCheckBox4");
+        ccmhCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccmhCBActionPerformed(evt);
+            }
+        });
 
         newAnalyseButton.setText("Nouvelle Analyse");
         newAnalyseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +369,7 @@ public class analysesFrame extends javax.swing.JFrame {
                     .addComponent(hemoglobineCB)
                     .addComponent(leucocytesCB)
                     .addComponent(hematiesCB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newAnalyseButton)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -350,7 +385,7 @@ public class analysesFrame extends javax.swing.JFrame {
                             .addComponent(vihCB)
                             .addComponent(rdwCB)
                             .addComponent(globulesBlancCB))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,10 +531,15 @@ public class analysesFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hematocritesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hematocritesCBActionPerformed
-        // TODO add your handling code here:
+        if(hematiesCB.isSelected()){
+            anal.setItem("hematocrites");
+            listeAnalyses.add(anal);
+        }
     }//GEN-LAST:event_hematocritesCBActionPerformed
 
     private void newAnalyseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAnalyseButtonActionPerformed
+        
+        //Ajout de la demande
         Demande d = new Demande();
         d.setRefMedecin(1);
         d.setRefPatient(patient.getId());
@@ -509,7 +549,52 @@ public class analysesFrame extends javax.swing.JFrame {
         
         int refDem = analyseSB.insertDemande(d);
         JOptionPane.showMessageDialog(null, "Demande envoyée ! \n Le numero de référence de demande est : " + refDem);
+        
+        for(int i =0; i<listeAnalyses.size(); i++){
+            listeAnalyses.get(i).setRefDemande(refDem);
+        }
+        
+        //Envoi des analyses
+        for(int i = 0; i<listeAnalyses.size(); i++){
+            analyseSB.insertAnalyse(listeAnalyses.get(i));
+        }
+        
     }//GEN-LAST:event_newAnalyseButtonActionPerformed
+
+    private void leucocytesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leucocytesCBActionPerformed
+        if(leucocytesCB.isSelected()){
+            anal.setItem("leucocytes");
+            listeAnalyses.add(anal);
+        }
+    }//GEN-LAST:event_leucocytesCBActionPerformed
+
+    private void hematiesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hematiesCBActionPerformed
+        if(hematiesCB.isSelected()){
+            anal.setItem("hematies");
+            listeAnalyses.add(anal);
+        }
+    }//GEN-LAST:event_hematiesCBActionPerformed
+
+    private void hemoglobineCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hemoglobineCBActionPerformed
+        if(hemoglobineCB.isSelected()){
+            anal.setItem("hemoglobine");
+            listeAnalyses.add(anal);
+        }
+    }//GEN-LAST:event_hemoglobineCBActionPerformed
+
+    private void vgmCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vgmCBActionPerformed
+        if(vgmCB.isSelected()){
+            anal.setItem("vgm");
+            listeAnalyses.add(anal);
+        }
+    }//GEN-LAST:event_vgmCBActionPerformed
+
+    private void ccmhCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccmhCBActionPerformed
+        if(ccmhCB.isSelected()){
+            anal.setItem("ccmh");
+            listeAnalyses.add(anal);
+        }
+    }//GEN-LAST:event_ccmhCBActionPerformed
 
     /**
      * @param args the command line arguments

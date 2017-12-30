@@ -398,7 +398,7 @@
                               <Component id="leucocytesCB" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="hematiesCB" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="119" max="32767" attributes="0"/>
+                          <EmptySpace pref="152" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="newAnalyseButton" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
@@ -418,7 +418,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="154" max="32767" attributes="0"/>
+                          <EmptySpace pref="186" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -534,10 +534,19 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="leucocytesCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leucocytesCBActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hematiesCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hematiesCBActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hemoglobineCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hemoglobineCBActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hematocritesCB">
                   <Events>
@@ -545,28 +554,22 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="vgmCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vgmCBActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="ccmhCB">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ccmhCBActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="tcmhCB">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jCheckBox1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="vihCB">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jCheckBox2"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="rdwCB">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jCheckBox3"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="globulesBlancCB">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jCheckBox4"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="newAnalyseButton">
                   <Properties>

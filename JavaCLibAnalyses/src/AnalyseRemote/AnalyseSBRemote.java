@@ -15,7 +15,7 @@ import javax.ejb.Remote;
 @Remote
 public interface AnalyseSBRemote {
     
-    boolean insertAnalyse(String item, String value, int ref);
+    boolean insertAnalyse(Analyses anal);
     
     List<Analyses> getAnalyses(int refDemande);
     
