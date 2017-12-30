@@ -28,10 +28,11 @@ public class analysesFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public analysesFrame(Patient pat) {
+    public analysesFrame(Patient pat, AnalyseSBRemote analyseBean) {
         initComponents();
         this.setLocationRelativeTo(null);
         patient = pat;
+        analyseSB = analyseBean;
         patientLabel.setText(patient.getNom() + " " + patient.getPrenom());
     }
 

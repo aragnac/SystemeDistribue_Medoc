@@ -5,6 +5,7 @@
  */
 package applicationmedecinclient;
 
+import AnalyseRemote.AnalyseSBRemote;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -19,6 +20,7 @@ import patientRemote.patientSBRemote;
 public class searchFrame extends javax.swing.JFrame {
 
     private static patientSBRemote patientSB;
+    private static AnalyseSBRemote analyseSB;
     
     /**
      * Creates new form searchFrame
@@ -28,10 +30,11 @@ public class searchFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public searchFrame(patientSBRemote patientBean) {
+    public searchFrame(patientSBRemote patientBean, AnalyseSBRemote analyseBean) {
         initComponents();
         this.setLocationRelativeTo(null);
         patientSB = patientBean;
+        analyseSB = analyseBean;
         listPanel.setVisible(false);
     }
 
@@ -178,7 +181,7 @@ public class searchFrame extends javax.swing.JFrame {
         ListModel dlm = patientsJList.getModel();
         Patient patient = (Patient) dlm.getElementAt(index);
         
-        analysesFrame anal = new analysesFrame(patient);
+        analysesFrame anal = new analysesFrame(patient, analyseSB);
         anal.setVisible(true);
     }//GEN-LAST:event_patientsJListMouseClicked
 

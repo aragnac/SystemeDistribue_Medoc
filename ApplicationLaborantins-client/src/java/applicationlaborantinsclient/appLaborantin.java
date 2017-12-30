@@ -7,6 +7,7 @@ package applicationlaborantinsclient;
 
 import AnalyseRemote.AnalyseSBRemote;
 import AnalyseRemote.Demande;
+import java.util.List;
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -27,10 +28,10 @@ import javax.swing.SwingUtilities;
 public class appLaborantin extends javax.swing.JFrame implements MessageListener {
 
     private static AnalyseSBRemote analyseSB;
-    private static Queue analyseQueue = null;
     private Connection connection = null;
     private Session session = null;
     private MessageConsumer consumer = null;
+    private DefaultListModel dlm;
     
     /**
      * Creates new form appLaborantin
@@ -43,15 +44,24 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
     public appLaborantin(Queue queue, Session sess, Connection con, AnalyseSBRemote analysesb) {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-        analyseQueue = queue;
-        connection = con;
+
+        connection = con; 
         session = sess;
         analyseSB = analysesb;
+        dlm = new DefaultListModel();
         
         try{
             consumer = sess.createConsumer(queue);
             consumer.setMessageListener(this);
+            
+            /*List<Demande> d = analyseSB.getDemandes();
+
+            for(int i = 0; i < d.size(); i++)
+            {
+                dlm.addElement(d.get(i));
+            }
+            demandesList.setModel(dlm);*/
+            
         }catch(JMSException ex){
             System.out.println("JMS error : " + ex);
         }
@@ -79,6 +89,11 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
 
         jLabel2.setText("Liste des demandes :");
 
+        demandesList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "demande1" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         demandesList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 demandesListMouseClicked(evt);
@@ -103,7 +118,7 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
                         .addComponent(nbrDemandesLabel)
                         .addGap(40, 40, 40)
                         .addComponent(newDemandeRB)
-                        .addGap(0, 176, Short.MAX_VALUE))
+                        .addGap(0, 351, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -139,14 +154,17 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
 
     @Override
     public void onMessage(Message message){
-        ObjectMessage objMessage = (ObjectMessage) message;
-        Demande dem = (Demande)objMessage;
-        DefaultListModel dlm = new DefaultListModel();
+
+        int nbrDemandes = 0;
         
         try{
             newDemandeRB.setSelected(true);
-            nbrDemandesLabel.setText((Integer.parseInt(nbrDemandesLabel.getText()) + 1));
+            nbrDemandes = Integer.parseInt(nbrDemandesLabel.getText()) + 1;
+            nbrDemandesLabel.setText(Integer.toString(nbrDemandes));
             //Ajout de la demande à la liste
+            ObjectMessage objMessage = (ObjectMessage) message;
+            Demande dem = (Demande) objMessage.getObject();
+            System.out.println("Demande id : " + dem.getId());
             dlm.addElement(dem);
             demandesList.setModel(dlm);
             

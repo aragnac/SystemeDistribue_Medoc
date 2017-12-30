@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Demande.findByRefPatient", query = "SELECT d FROM Demande d WHERE d.refPatient = :refPatient")
     , @NamedQuery(name = "Demande.findByRefMedecin", query = "SELECT d FROM Demande d WHERE d.refMedecin = :refMedecin")
     , @NamedQuery(name = "Demande.findByDateHeureDemande", query = "SELECT d FROM Demande d WHERE d.dateHeureDemande = :dateHeureDemande")
+    , @NamedQuery(name = "Demande.findByTraitee", query = "SELECT d FROM Demande d WHERE d.traitee = :traitee")
     , @NamedQuery(name = "Demande.findByUrgent", query = "SELECT d FROM Demande d WHERE d.urgent = :urgent")})
 public class Demande implements Serializable {
 
@@ -54,6 +55,8 @@ public class Demande implements Serializable {
     @Column(name = "DateHeureDemande")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateHeureDemande;
+    @Column(name = "Traitee")
+    private Boolean traitee;
     @Column(name = "Urgent")
     private Boolean urgent;
 
@@ -102,6 +105,14 @@ public class Demande implements Serializable {
         this.dateHeureDemande = dateHeureDemande;
     }
 
+    public Boolean getTraitee() {
+        return traitee;
+    }
+
+    public void setTraitee(Boolean traitee) {
+        this.traitee = traitee;
+    }
+
     public Boolean getUrgent() {
         return urgent;
     }
@@ -132,7 +143,7 @@ public class Demande implements Serializable {
 
     @Override
     public String toString() {
-        return "AnalyseRemote.Demande[ id=" + id + " ]";
+        return "Num : " + id +", " + dateHeureDemande + ", Medecin : "+ refMedecin+", Urgent : " + urgent;
     }
     
 }

@@ -18,13 +18,16 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
+import javax.jms.QueueConnectionFactory;
 import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.swing.event.EventListenerList;
 
@@ -38,10 +41,8 @@ public class AnalyseSB implements AnalyseSBRemote {
     @Resource(mappedName = "jms/analyseQueue")
     private Queue analyseQueue;
 
-    @Inject
-    @JMSConnectionFactory("jms/analyseQueueFactory")
+    @Resource(mappedName = "jms/analyseQueueFactory")
     private ConnectionFactory factory;
-    //private JMSContext context;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -86,6 +87,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             a.setItem(item);
             a.setValeur(value);
             a.setRefPatient(ref);*/
+            demande.setTraitee(false);
             em.persist(demande);
             em.getTransaction().commit();
             ref = demande.getId();
@@ -108,7 +110,7 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d ", Demande.class);
+        TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d WHERE d.traitee = false ", Demande.class);
         results = query.getResultList();
 
         em.close();
@@ -121,7 +123,8 @@ public class AnalyseSB implements AnalyseSBRemote {
     
         List<Analyses> results = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
+        EntityManagerFactory emf;
+        emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
@@ -138,15 +141,25 @@ public class AnalyseSB implements AnalyseSBRemote {
         try {
             Connection con = factory.createConnection();
             Session session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            con.start();
             MessageProducer producer = session.createProducer(analyseQueue);
             ObjectMessage objectMessage = session.createObjectMessage();
             
             objectMessage.setObject((Demande)messageData);
             producer.send(objectMessage);
+            con.close();
+            System.out.println("Envoye sur la queue.");
             //context.createProducer().send(analyseQueue, messageData);
         } catch (JMSException ex) {
             System.out.println("Exception : " + ex);
         }
     }
+    
+
+    /*private void sendJMSMessageToAnalyseQueue(Object messageData) {
+
+        context.createProducer().send(analyseQueue, (Message) messageData);
+        System.out.println("Message envoye sur la queue");
+    }*/
     
 }
