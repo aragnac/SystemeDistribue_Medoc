@@ -60,7 +60,7 @@ public class Main {
             //login.dispose();
             
             //Run mainframe
-            appLaborantin app = new appLaborantin(analyseTopic, session, connection, analyseSB);
+            appLaborantin app = new appLaborantin(analyseQueue, session, connection, analyseSB);
             app.setVisible(true);
             //Resultats result = new Resultats(analyseTopic, session, connection, analyseSB);
             //result.setVisible(true);

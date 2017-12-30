@@ -8,8 +8,15 @@ package applicationlaborantinsclient;
 import AnalyseRemote.AnalyseSBRemote;
 import AnalyseRemote.Demande;
 import javax.jms.Connection;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
+import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 
@@ -17,12 +24,13 @@ import javax.swing.SwingUtilities;
  *
  * @author Nicolas
  */
-public class appLaborantin extends javax.swing.JFrame {
+public class appLaborantin extends javax.swing.JFrame implements MessageListener {
 
     private static AnalyseSBRemote analyseSB;
-    private Topic topic = null;
+    private static Queue analyseQueue = null;
     private Connection connection = null;
     private Session session = null;
+    private MessageConsumer consumer = null;
     
     /**
      * Creates new form appLaborantin
@@ -32,24 +40,21 @@ public class appLaborantin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public appLaborantin(Topic top, Session sess, Connection con, AnalyseSBRemote analysesb) {
+    public appLaborantin(Queue queue, Session sess, Connection con, AnalyseSBRemote analysesb) {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        topic = top;
+        analyseQueue = queue;
         connection = con;
         session = sess;
         analyseSB = analysesb;
         
-        
-        analyseSB.addDemandeListener((Demande d) -> {
-            // exécution dans l'EDT
-            SwingUtilities.invokeLater(() -> {
-                // à chaque fois que la température change, on met à jour le textfield
-                newDemandeRB.setSelected(true);
-                nbrDemandesLabel.setText((Integer.parseInt(nbrDemandesLabel.getText()) + 1));
-            });
-        });
+        try{
+            consumer = sess.createConsumer(queue);
+            consumer.setMessageListener(this);
+        }catch(JMSException ex){
+            System.out.println("JMS error : " + ex);
+        }
     }
 
     /**
@@ -128,10 +133,28 @@ public class appLaborantin extends javax.swing.JFrame {
         ListModel dlm = demandesList.getModel();
         Demande demande = (Demande) dlm.getElementAt(index);
         
-        Resultats result = new Resultats(topic, session, connection, analyseSB, demande);
+        Resultats result = new Resultats(session, connection, analyseSB, demande);
         result.setVisible(true);
     }//GEN-LAST:event_demandesListMouseClicked
 
+    @Override
+    public void onMessage(Message message){
+        ObjectMessage objMessage = (ObjectMessage) message;
+        Demande dem = (Demande)objMessage;
+        DefaultListModel dlm = new DefaultListModel();
+        
+        try{
+            newDemandeRB.setSelected(true);
+            nbrDemandesLabel.setText((Integer.parseInt(nbrDemandesLabel.getText()) + 1));
+            //Ajout de la demande à la liste
+            dlm.addElement(dem);
+            demandesList.setModel(dlm);
+            
+ 
+        }catch(Exception ex){
+            System.out.println("Jms reception error : " + ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

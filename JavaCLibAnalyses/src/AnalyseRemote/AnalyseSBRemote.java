@@ -17,14 +17,10 @@ public interface AnalyseSBRemote {
     
     boolean insertAnalyse(String item, String value, int ref);
     
+    List<Analyses> getAnalyses(int refDemande);
+    
     int insertDemande(Demande demande);
     
     List<Demande> getDemandes();
-    
-    public void addDemandeListener(demandeListener listener);
- 
-    public void removeDemandeListener(demandeListener listener);
-    
-    public demandeListener[] getDemandeListeners();
     
 }

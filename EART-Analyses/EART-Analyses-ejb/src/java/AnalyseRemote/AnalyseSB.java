@@ -8,7 +8,20 @@ package AnalyseRemote;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
+import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,10 +35,17 @@ import javax.swing.event.EventListenerList;
 @Stateless
 public class AnalyseSB implements AnalyseSBRemote {
 
+    @Resource(mappedName = "jms/analyseQueue")
+    private Queue analyseQueue;
+
+    @Inject
+    @JMSConnectionFactory("jms/analyseQueueFactory")
+    private ConnectionFactory factory;
+    //private JMSContext context;
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     // un seul objet pour tous les types d'écouteurs
-    private final EventListenerList listeners = new EventListenerList();
     
     
     @Override
@@ -71,7 +91,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             ref = demande.getId();
             em.close();
             
-            this.fireTemperatureChanged(demande);
+            sendJMSMessageToAnalyseQueue(demande);
             
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -96,26 +116,36 @@ public class AnalyseSB implements AnalyseSBRemote {
         return results;
     }
     
-    /***  Listener demande ***/
     @Override
-    public void addDemandeListener(demandeListener listener) {
-        listeners.add(demandeListener.class, listener);
-    }
+    public List<Analyses> getAnalyses(int refDemande){
     
-    @Override
-    public void removeDemandeListener(demandeListener listener) {
-        listeners.remove(demandeListener.class, listener);
+        List<Analyses> results = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        TypedQuery<Analyses> query = em.createQuery("SELECT a FROM Analyses a ", Analyses.class);
+        results = query.getResultList();
+
+        em.close();
+
+        return results;
     }
-    
-    @Override
-    public demandeListener[] getDemandeListeners() {
-        return listeners.getListeners(demandeListener.class);
-    }
-    
-    protected void fireTemperatureChanged(Demande d) {
+
+    private void sendJMSMessageToAnalyseQueue(Object messageData) {
         
-        for(demandeListener listener : getDemandeListeners()) {
-            listener.nouvelleDemande(d);
+        try {
+            Connection con = factory.createConnection();
+            Session session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            MessageProducer producer = session.createProducer(analyseQueue);
+            ObjectMessage objectMessage = session.createObjectMessage();
+            
+            objectMessage.setObject((Demande)messageData);
+            producer.send(objectMessage);
+            //context.createProducer().send(analyseQueue, messageData);
+        } catch (JMSException ex) {
+            System.out.println("Exception : " + ex);
         }
     }
     

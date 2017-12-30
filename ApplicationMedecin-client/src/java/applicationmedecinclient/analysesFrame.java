@@ -8,6 +8,7 @@ package applicationmedecinclient;
 import AnalyseRemote.AnalyseSBRemote;
 import java.util.Calendar;
 import AnalyseRemote.Demande;
+import javax.swing.JOptionPane;
 import patientRemote.Patient;
 
 /**
@@ -506,6 +507,7 @@ public class analysesFrame extends javax.swing.JFrame {
         d.setUrgent(urgentRB.isSelected());
         
         int refDem = analyseSB.insertDemande(d);
+        JOptionPane.showMessageDialog(null, "Demande envoyée ! \n Le numero de référence de demande est : " + refDem);
     }//GEN-LAST:event_newAnalyseButtonActionPerformed
 
     /**

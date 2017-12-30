@@ -38,10 +38,9 @@ public class Resultats extends javax.swing.JFrame {
         
     }
     
-    public Resultats(Topic top, Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
+    public Resultats(Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
         initComponents();
         
-        topic = top;
         connection = con;
         session = sess;
         analyseSB = analyseBean;
