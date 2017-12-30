@@ -5,6 +5,7 @@
  */
 package AnalyseRemote;
 
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -13,7 +14,11 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface AnalyseSBRemote {
-
+    
     boolean insertAnalyse(String item, String value, int ref);
+    
+    int insertDemande(Demande demande);
+    
+    List<Demande> getDemandes();
     
 }

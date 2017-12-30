@@ -3,6 +3,7 @@
   <persistence-unit name="JavaCLibPatientPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>patientRemote.Patient</class>
+    <class>patientRemote.Demande</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/DB_MEDOC?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
@@ -10,4 +11,10 @@
       <property name="javax.persistence.jdbc.password" value="@@lopi47"/>
     </properties>
   </persistence-unit>
+  <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.44</version>
+    <scope>runtime</scope>
+  </dependency>
 </persistence>

@@ -7,6 +7,7 @@ package applicationmedecinclient;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import AnalyseRemote.AnalyseSBRemote;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jms.Connection;
@@ -27,6 +28,9 @@ public class Main {
 
     @EJB
     private static patientSBRemote patientSB;
+     
+    @EJB
+    private static AnalyseSBRemote analyseSB;
 
     @Resource(mappedName = "jms/analyseTopic")
     private static Topic analyseTopic;

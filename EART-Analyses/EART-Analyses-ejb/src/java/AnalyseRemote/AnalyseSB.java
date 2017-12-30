@@ -5,10 +5,14 @@
  */
 package AnalyseRemote;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -43,4 +47,47 @@ public class AnalyseSB implements AnalyseSBRemote {
         }
         return exit;
     }
+
+    @Override
+    public int insertDemande(Demande demande) {
+        int ref = 0;
+        
+        //On passe en parametre de emf le nom de la persitence unit
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin(); 
+        
+        try{  
+            /*AnalyseRemote.Analyses a = new Analyses();
+            a.setItem(item);
+            a.setValeur(value);
+            a.setRefPatient(ref);*/
+            em.persist(demande);
+            em.getTransaction().commit();
+            em.close();
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return exit;
+    }
+    
+    @Override
+    public List<Demande> getDemandes(){
+    
+        List<Demande> results = new ArrayList<>();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d ", Demande.class);
+        results = query.getResultList();
+
+        em.close();
+
+        return results;
+    }
+    
+    
 }

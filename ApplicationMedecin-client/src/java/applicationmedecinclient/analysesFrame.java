@@ -5,6 +5,9 @@
  */
 package applicationmedecinclient;
 
+import AnalyseRemote.AnalyseSBRemote;
+import java.util.Calendar;
+import AnalyseRemote.Demande;
 import patientRemote.Patient;
 
 /**
@@ -13,7 +16,8 @@ import patientRemote.Patient;
  */
 public class analysesFrame extends javax.swing.JFrame {
 
-    Patient patient;
+    private static AnalyseSBRemote analyseSB;
+    private Patient patient;
     
     /**
      * Creates new form analysesFrame
@@ -89,6 +93,7 @@ public class analysesFrame extends javax.swing.JFrame {
         rdwCB = new javax.swing.JCheckBox();
         globulesBlancCB = new javax.swing.JCheckBox();
         newAnalyseButton = new javax.swing.JButton();
+        urgentRB = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         nomLabel = new javax.swing.JLabel();
         prenomLabel = new javax.swing.JLabel();
@@ -293,6 +298,13 @@ public class analysesFrame extends javax.swing.JFrame {
         globulesBlancCB.setText("jCheckBox4");
 
         newAnalyseButton.setText("Nouvelle Analyse");
+        newAnalyseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAnalyseButtonActionPerformed(evt);
+            }
+        });
+
+        urgentRB.setText("Urgent");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -320,7 +332,7 @@ public class analysesFrame extends javax.swing.JFrame {
                     .addComponent(hemoglobineCB)
                     .addComponent(leucocytesCB)
                     .addComponent(hematiesCB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newAnalyseButton)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -328,14 +340,15 @@ public class analysesFrame extends javax.swing.JFrame {
                             .addComponent(tcmhLab, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(vihLab, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(rdwLab, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(globulesBlancLab, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(globulesBlancLab, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(urgentRB, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tcmhCB)
                             .addComponent(vihCB)
                             .addComponent(rdwCB)
                             .addComponent(globulesBlancCB))))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,6 +369,14 @@ public class analysesFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdwLab)
+                            .addComponent(rdwCB))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(globulesBlancLab)
+                            .addComponent(globulesBlancCB)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ana3Label)
                             .addComponent(hemoglobineCB))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -369,16 +390,10 @@ public class analysesFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ana6Label)
-                            .addComponent(ccmhCB)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdwLab)
-                            .addComponent(rdwCB))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(globulesBlancLab)
-                            .addComponent(globulesBlancCB))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(ccmhCB))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(urgentRB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newAnalyseButton))
         );
 
@@ -482,6 +497,17 @@ public class analysesFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_hematocritesCBActionPerformed
 
+    private void newAnalyseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAnalyseButtonActionPerformed
+        Demande d = new Demande();
+        d.setRefMedecin(1);
+        d.setRefPatient(patient.getId());
+        Calendar cal = Calendar.getInstance();
+        d.setDateHeureDemande(cal.getTime());
+        d.setUrgent(urgentRB.isSelected());
+        
+        int refDem = analyseSB.insertDemande(d);
+    }//GEN-LAST:event_newAnalyseButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -571,6 +597,7 @@ public class analysesFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox tcmhCB;
     private javax.swing.JLabel tcmhLab;
     private javax.swing.JLabel tcmhLabel;
+    private javax.swing.JRadioButton urgentRB;
     private javax.swing.JCheckBox vgmCB;
     private javax.swing.JLabel vgmLabel;
     private javax.swing.JCheckBox vihCB;
