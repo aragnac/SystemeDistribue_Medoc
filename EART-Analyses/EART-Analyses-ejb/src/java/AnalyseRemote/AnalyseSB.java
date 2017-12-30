@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.swing.event.EventListenerList;
 
 /**
  *
@@ -23,6 +24,9 @@ public class AnalyseSB implements AnalyseSBRemote {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    // un seul objet pour tous les types d'écouteurs
+    private final EventListenerList listeners = new EventListenerList();
+    
     
     @Override
     public boolean insertAnalyse(String item, String value, int ref) {
@@ -64,12 +68,15 @@ public class AnalyseSB implements AnalyseSBRemote {
             a.setRefPatient(ref);*/
             em.persist(demande);
             em.getTransaction().commit();
+            ref = demande.getId();
             em.close();
+            
+            this.fireTemperatureChanged(demande);
             
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return exit;
+        return ref;
     }
     
     @Override
@@ -89,5 +96,27 @@ public class AnalyseSB implements AnalyseSBRemote {
         return results;
     }
     
+    /***  Listener demande ***/
+    @Override
+    public void addDemandeListener(demandeListener listener) {
+        listeners.add(demandeListener.class, listener);
+    }
+    
+    @Override
+    public void removeDemandeListener(demandeListener listener) {
+        listeners.remove(demandeListener.class, listener);
+    }
+    
+    @Override
+    public demandeListener[] getDemandeListeners() {
+        return listeners.getListeners(demandeListener.class);
+    }
+    
+    protected void fireTemperatureChanged(Demande d) {
+        
+        for(demandeListener listener : getDemandeListeners()) {
+            listener.nouvelleDemande(d);
+        }
+    }
     
 }

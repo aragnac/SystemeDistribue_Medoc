@@ -5,9 +5,13 @@
  */
 package applicationlaborantinsclient;
 
+import AnalyseRemote.AnalyseSBRemote;
+import AnalyseRemote.Demande;
 import javax.jms.Connection;
 import javax.jms.Session;
 import javax.jms.Topic;
+import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,6 +19,7 @@ import javax.jms.Topic;
  */
 public class appLaborantin extends javax.swing.JFrame {
 
+    private static AnalyseSBRemote analyseSB;
     private Topic topic = null;
     private Connection connection = null;
     private Session session = null;
@@ -24,14 +29,27 @@ public class appLaborantin extends javax.swing.JFrame {
      */
     public appLaborantin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
-    public appLaborantin(Topic top, Session sess, Connection con) {
+    public appLaborantin(Topic top, Session sess, Connection con, AnalyseSBRemote analysesb) {
         initComponents();
+        this.setLocationRelativeTo(null);
         
         topic = top;
         connection = con;
         session = sess;
+        analyseSB = analysesb;
+        
+        
+        analyseSB.addDemandeListener((Demande d) -> {
+            // exécution dans l'EDT
+            SwingUtilities.invokeLater(() -> {
+                // à chaque fois que la température change, on met à jour le textfield
+                newDemandeRB.setSelected(true);
+                nbrDemandesLabel.setText((Integer.parseInt(nbrDemandesLabel.getText()) + 1));
+            });
+        });
     }
 
     /**
@@ -47,7 +65,7 @@ public class appLaborantin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         demandesList = new javax.swing.JList<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        newDemandeRB = new javax.swing.JRadioButton();
         nbrDemandesLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,16 +74,16 @@ public class appLaborantin extends javax.swing.JFrame {
 
         jLabel2.setText("Liste des demandes :");
 
-        demandesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        demandesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                demandesListMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(demandesList);
 
-        jRadioButton1.setText("New!");
+        newDemandeRB.setText("New!");
 
-        nbrDemandesLabel.setText("3");
+        nbrDemandesLabel.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +97,7 @@ public class appLaborantin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nbrDemandesLabel)
                         .addGap(40, 40, 40)
-                        .addComponent(jRadioButton1)
+                        .addComponent(newDemandeRB)
                         .addGap(0, 176, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -93,7 +111,7 @@ public class appLaborantin extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jRadioButton1)
+                    .addComponent(newDemandeRB)
                     .addComponent(nbrDemandesLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,6 +122,15 @@ public class appLaborantin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void demandesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_demandesListMouseClicked
+        int index = demandesList.locationToIndex(evt.getPoint());
+        ListModel dlm = demandesList.getModel();
+        Demande demande = (Demande) dlm.getElementAt(index);
+        
+        Resultats result = new Resultats(topic, session, connection, analyseSB, demande);
+        result.setVisible(true);
+    }//GEN-LAST:event_demandesListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -144,8 +171,8 @@ public class appLaborantin extends javax.swing.JFrame {
     private javax.swing.JList<String> demandesList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nbrDemandesLabel;
+    private javax.swing.JRadioButton newDemandeRB;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,4 +21,10 @@ public interface AnalyseSBRemote {
     
     List<Demande> getDemandes();
     
+    public void addDemandeListener(demandeListener listener);
+ 
+    public void removeDemandeListener(demandeListener listener);
+    
+    public demandeListener[] getDemandeListeners();
+    
 }

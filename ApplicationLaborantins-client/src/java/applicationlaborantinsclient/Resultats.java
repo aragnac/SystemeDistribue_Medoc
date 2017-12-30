@@ -6,6 +6,7 @@
 package applicationlaborantinsclient;
 
 import AnalyseRemote.AnalyseSBRemote;
+import AnalyseRemote.Demande;
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
@@ -25,6 +26,7 @@ public class Resultats extends javax.swing.JFrame {
     private Topic topic = null;
     private Connection connection = null;
     private Session session = null;
+    private Demande demande = null;
     
     private MessageProducer producer = null;
 
@@ -36,13 +38,14 @@ public class Resultats extends javax.swing.JFrame {
         
     }
     
-    public Resultats(Topic top, Session sess, Connection con, AnalyseSBRemote analyseBean) {
+    public Resultats(Topic top, Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
         initComponents();
         
         topic = top;
         connection = con;
         session = sess;
         analyseSB = analyseBean;
+        demande = dem;
         
         try{
             producer = session.createProducer(topic);

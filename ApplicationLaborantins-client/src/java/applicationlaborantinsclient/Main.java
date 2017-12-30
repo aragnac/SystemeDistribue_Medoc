@@ -60,8 +60,10 @@ public class Main {
             //login.dispose();
             
             //Run mainframe
-            Resultats result = new Resultats(analyseTopic, session, connection, analyseSB);
-            result.setVisible(true);
+            appLaborantin app = new appLaborantin(analyseTopic, session, connection, analyseSB);
+            app.setVisible(true);
+            //Resultats result = new Resultats(analyseTopic, session, connection, analyseSB);
+            //result.setVisible(true);
             
         }catch(JMSException ex){
             
