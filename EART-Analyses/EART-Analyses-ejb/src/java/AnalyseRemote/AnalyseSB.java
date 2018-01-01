@@ -6,7 +6,6 @@
 package AnalyseRemote;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -18,10 +17,11 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
+import javax.jms.Topic;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -31,8 +31,12 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class AnalyseSB implements AnalyseSBRemote {
 
-    /*@PersistenceContext(unitName="JavaCLibAnalysesPU")
-    private EntityManager em;*/
+    @Resource(mappedName = "jms/analyseTopic")
+    private Topic analyseTopic;
+
+    @Resource(mappedName = "jms/analyseTopicFactory")
+    private ConnectionFactory topicFactory;
+
     @Resource SessionContext ctx;
     
     @Resource(mappedName = "jms/analyseQueue")
@@ -40,6 +44,14 @@ public class AnalyseSB implements AnalyseSBRemote {
 
     @Resource(mappedName = "jms/analyseQueueFactory")
     private ConnectionFactory factory;
+    
+    
+    
+    /*@Resource(mappedName = "jms/analyseTopic")
+    private Queue analyseTopic;
+
+    @Resource(mappedName = "jms/analyseTopicFactory")
+    private ConnectionFactory factoryTopic;*/
     
     //EntityManagerFactory emf = null;
 
@@ -57,11 +69,11 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        System.out.println(anal.getDateAnalyse());
+        /*System.out.println(anal.getDateAnalyse());
         System.out.println(anal.getRefDemande());
         System.out.println(anal.getRefPatient());
         System.out.println(anal.getItem());
-        System.out.println("valeur : " + anal.getValeur());
+        System.out.println("valeur : " + anal.getValeur());*/
         
         try{
             em.persist(anal);
@@ -72,6 +84,25 @@ public class AnalyseSB implements AnalyseSBRemote {
             System.out.println(e.getMessage());
         }
         return exit;
+    }
+    
+    @Override
+    public int updateAnalyse(Analyses anal){
+        int Exit = 0;
+        System.out.println("Dans update.");
+        try{
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        Query query = em.createQuery("UPDATE Analyses a SET valeur = "+anal.getValeur()+" WHERE a.RefDemande = "+anal.getRefDemande()+" AND a.item = "+anal.getItem()+"");
+ 
+        Exit = query.executeUpdate();
+        System.out.println("update SEND.");
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return Exit;
     }
 
     @Override
@@ -101,6 +132,25 @@ public class AnalyseSB implements AnalyseSBRemote {
             System.out.println(e.getMessage());
         }
         return ref;
+    }
+    
+    @Override
+    public int updateDemande(Demande demande){
+        int Exit = 0;
+        System.out.println("Dans update.");
+        try{
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        Query query = em.createQuery("UPDATE Demande d SET Traitee = 1 WHERE d.id = "+demande.getId()+"");
+ 
+        Exit = query.executeUpdate();
+        System.out.println("update demande SEND.");
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return Exit;   
     }
     
     @Override
@@ -158,7 +208,27 @@ public class AnalyseSB implements AnalyseSBRemote {
             objectMessage.setObject((Demande)messageData);
             producer.send(objectMessage);
             con.close();
-            System.out.println("Envoye sur la queue.");
+            System.out.println("Envoie sur la queue.");
+            //context.createProducer().send(analyseQueue, messageData);
+        } catch (JMSException ex) {
+            System.out.println("Exception : " + ex);
+        }
+    }
+    
+    @Override
+    public void sendJMSMessageToAnalyseTopic(Object messageData) {
+        
+        try {
+            Connection con = topicFactory.createConnection();
+            Session session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            con.start();
+            MessageProducer producer = session.createProducer(analyseTopic);
+            ObjectMessage objectMessage = session.createObjectMessage();
+            
+            objectMessage.setObject((Demande)messageData);
+            producer.send(objectMessage);
+            con.close();
+            System.out.println("Envoye sur le Topic.");
             //context.createProducer().send(analyseQueue, messageData);
         } catch (JMSException ex) {
             System.out.println("Exception : " + ex);

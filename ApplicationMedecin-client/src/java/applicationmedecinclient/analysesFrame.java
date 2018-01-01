@@ -43,10 +43,6 @@ public class analysesFrame extends javax.swing.JFrame {
         
         listeAnalyses = new ArrayList<>();
         anal = new Analyses();
-        Calendar cal = Calendar.getInstance();
-        anal.setDateAnalyse(cal.getTime());
-        anal.setRefPatient(pat.getId());
-        anal.setValeur("-");
     }
 
     /**
@@ -556,13 +552,19 @@ public class analysesFrame extends javax.swing.JFrame {
         
         //Envoi des analyses
         for(int i = 0; i<listeAnalyses.size(); i++){
-            analyseSB.insertAnalyse(listeAnalyses.get(i));
+            System.out.println(listeAnalyses.get(i).getItem());
+            //analyseSB.insertAnalyse(listeAnalyses.get(i));
         }
         
     }//GEN-LAST:event_newAnalyseButtonActionPerformed
 
     private void leucocytesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leucocytesCBActionPerformed
         if(leucocytesCB.isSelected()){
+            anal = new Analyses();
+            Calendar cal = Calendar.getInstance();
+            anal.setDateAnalyse(cal.getTime());
+            anal.setRefPatient(patient.getId());
+            anal.setValeur("-");
             anal.setItem("leucocytes");
             listeAnalyses.add(anal);
         }
@@ -570,6 +572,11 @@ public class analysesFrame extends javax.swing.JFrame {
 
     private void hematiesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hematiesCBActionPerformed
         if(hematiesCB.isSelected()){
+            anal = new Analyses();
+            Calendar cal = Calendar.getInstance();
+            anal.setDateAnalyse(cal.getTime());
+            anal.setRefPatient(patient.getId());
+            anal.setValeur("-");
             anal.setItem("hematies");
             listeAnalyses.add(anal);
         }
@@ -577,6 +584,11 @@ public class analysesFrame extends javax.swing.JFrame {
 
     private void hemoglobineCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hemoglobineCBActionPerformed
         if(hemoglobineCB.isSelected()){
+            anal = new Analyses();
+            Calendar cal = Calendar.getInstance();
+            anal.setDateAnalyse(cal.getTime());
+            anal.setRefPatient(patient.getId());
+            anal.setValeur("-");
             anal.setItem("hemoglobine");
             listeAnalyses.add(anal);
         }
@@ -584,6 +596,11 @@ public class analysesFrame extends javax.swing.JFrame {
 
     private void vgmCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vgmCBActionPerformed
         if(vgmCB.isSelected()){
+            anal = new Analyses();
+            Calendar cal = Calendar.getInstance();
+            anal.setDateAnalyse(cal.getTime());
+            anal.setRefPatient(patient.getId());
+            anal.setValeur("-");
             anal.setItem("vgm");
             listeAnalyses.add(anal);
         }
@@ -591,6 +608,11 @@ public class analysesFrame extends javax.swing.JFrame {
 
     private void ccmhCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccmhCBActionPerformed
         if(ccmhCB.isSelected()){
+            anal = new Analyses();
+            Calendar cal = Calendar.getInstance();
+            anal.setDateAnalyse(cal.getTime());
+            anal.setRefPatient(patient.getId());
+            anal.setValeur("-");
             anal.setItem("ccmh");
             listeAnalyses.add(anal);
         }

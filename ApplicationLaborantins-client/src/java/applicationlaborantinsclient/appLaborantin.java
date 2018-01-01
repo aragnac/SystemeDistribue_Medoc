@@ -54,13 +54,13 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
             consumer = sess.createConsumer(queue);
             consumer.setMessageListener(this);
             
-            /*List<Demande> d = analyseSB.getDemandes();
+            List<Demande> d = analyseSB.getDemandes();
 
             for(int i = 0; i < d.size(); i++)
             {
                 dlm.addElement(d.get(i));
             }
-            demandesList.setModel(dlm);*/
+            demandesList.setModel(dlm);
             
         }catch(JMSException ex){
             System.out.println("JMS error : " + ex);

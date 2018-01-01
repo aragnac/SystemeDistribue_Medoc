@@ -17,10 +17,16 @@ public interface AnalyseSBRemote {
     
     boolean insertAnalyse(Analyses anal);
     
+    int updateAnalyse(Analyses anal);
+    
     List<Analyses> getAnalyses(int refDemande);
     
     int insertDemande(Demande demande);
     
+    int updateDemande(Demande demande);
+    
     List<Demande> getDemandes();
+    
+    void sendJMSMessageToAnalyseTopic(Object messageData);
     
 }

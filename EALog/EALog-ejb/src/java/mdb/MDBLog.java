@@ -5,10 +5,12 @@
  */
 package mdb;
 
+import AnalyseRemote.Demande;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 
 /**
  *
@@ -32,6 +34,13 @@ public class MDBLog implements MessageListener {
     
     @Override
     public void onMessage(Message message) {
+        try{
+        ObjectMessage objMessage = (ObjectMessage) message;
+        Demande dem = (Demande) objMessage.getObject();
+        System.out.println("MDB : " + dem.getId());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
     
 }

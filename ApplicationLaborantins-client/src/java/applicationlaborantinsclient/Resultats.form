@@ -36,56 +36,59 @@
                   <Component id="patientLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="141" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="ana6Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana4Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana3Label" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="ana2Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana1Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana5Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="hematocritesTF" max="32767" attributes="0"/>
-                          <Component id="vgmTF" max="32767" attributes="0"/>
-                          <Component id="ccmhTF" max="32767" attributes="0"/>
-                          <Component id="hemoglobineTF" alignment="0" max="32767" attributes="0"/>
-                          <Component id="hematiesTF" alignment="0" max="32767" attributes="0"/>
-                          <Component id="leucocytesTF" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="ana8Label" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana9Label" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana10Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="ana7Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="vihTF" min="-2" max="-2" attributes="0"/>
-                          <Component id="tcmhTF" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField10" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="demandeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="medecinLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="ana6Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana4Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana3Label" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="ana2Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana1Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana5Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="hematocritesTF" max="32767" attributes="0"/>
+                                  <Component id="vgmTF" max="32767" attributes="0"/>
+                                  <Component id="ccmhTF" max="32767" attributes="0"/>
+                                  <Component id="hemoglobineTF" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="hematiesTF" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="leucocytesTF" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="ana8Label" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana9Label" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana10Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ana7Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="vihTF" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tcmhTF" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="globulesblancTF" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField10" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace pref="25" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="demandeLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="medecinLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,7 +147,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="ana9Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="globulesblancTF" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -203,33 +206,48 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="leucocytesTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="hematiesTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="hematiesTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="hemoglobineTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="hemoglobineTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="hematocritesTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="hematocritesTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="vgmTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="vgmTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="ccmhTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ccmhTFActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ccmhTFFocusLost"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="ana7Label">
@@ -256,16 +274,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tcmhTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="vihTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="vihTFFocusLost"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField9">
+    <Component class="javax.swing.JTextField" name="globulesblancTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="value"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="globulesblancTFFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField10">
       <Properties>

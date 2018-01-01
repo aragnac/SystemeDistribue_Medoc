@@ -34,35 +34,24 @@ public class Main {
 
     @Resource(mappedName = "jms/analyseTopicFactory")
     private static ConnectionFactory analyseTopicFactory;
+    
+    private static Connection connection = null;
+    private static Session session = null;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        searchFrame search = new searchFrame(patientSB, analyseSB);
-        search.setVisible(true);
-    }
-
-    private Message createJMSMessageForjmsAnalyseTopic(Session session, Object messageData) throws JMSException {
-        // TODO create and populate message to send
-        TextMessage tm = session.createTextMessage();
-        tm.setText(messageData.toString());
-        return tm;
-    }
-
-    private void sendJMSMessageToAnalyseTopic(Object messageData) throws JMSException {
-        Connection connection = null;
-        Session session = null;
-        
         try{
             connection = analyseTopicFactory.createConnection();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             connection.start();
-        }
-        catch(JMSException ex){
-            System.out.println("Main error : " + ex);
-        }
         
+            searchFrame search = new searchFrame(patientSB, analyseSB, session, analyseTopic);
+            search.setVisible(true);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
-    
 }

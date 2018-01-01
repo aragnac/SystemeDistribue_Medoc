@@ -155,7 +155,7 @@ public class Analyses implements Serializable {
 
     @Override
     public String toString() {
-        return "AnalyseRemote.Analyses[ id=" + id + " ]";
+        return item;
     }
     
 }
