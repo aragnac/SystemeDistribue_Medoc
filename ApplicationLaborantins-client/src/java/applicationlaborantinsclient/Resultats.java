@@ -345,6 +345,7 @@ public class Resultats extends javax.swing.JFrame {
             for(int i = 0; i< listAnal.size() ; i++){
                 analyseSB.updateAnalyse( listAnal.get(i));
             }
+            analyseSB.updateDemande(demande);
             analyseSB.sendJMSMessageToAnalyseTopic(demande);
             JOptionPane.showMessageDialog(null, "Resultats de l'analyse envoyés.");
         }catch(Exception ex){

@@ -11,7 +11,9 @@ import java.util.Calendar;
 import AnalyseRemote.Demande;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import patientRemote.Patient;
 
 /**
@@ -24,6 +26,7 @@ public class analysesFrame extends javax.swing.JFrame {
     private Patient patient;
     private List<Analyses> listeAnalyses;
     private Analyses anal;
+    private List<Analyses> a;
     
     /**
      * Creates new form analysesFrame
@@ -36,13 +39,24 @@ public class analysesFrame extends javax.swing.JFrame {
     public analysesFrame(Patient pat, AnalyseSBRemote analyseBean) {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+       
         patient = pat;
         analyseSB = analyseBean;
         patientLabel.setText(patient.getNom() + " " + patient.getPrenom());
         
+        DefaultListModel dlm = new DefaultListModel();
         listeAnalyses = new ArrayList<>();
+        a = new ArrayList<>();
         anal = new Analyses();
+        
+        //Remplissage de la liste de demandes pour le patient concerné
+        List<Demande> d = analyseSB.getDemandesPatient(pat.getId());
+        for(int i = 0; i < d.size(); i++)
+        {
+            dlm.addElement(d.get(i).getId() + "/" + d.get(i).getDateHeureDemande());
+            demandesJList.setModel(dlm);
+        }
+        
     }
 
     /**
@@ -59,9 +73,8 @@ public class analysesFrame extends javax.swing.JFrame {
         informationsJPanel = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        demandesJList = new javax.swing.JList<>();
         jPanel5 = new javax.swing.JPanel();
-        ana10Label = new javax.swing.JLabel();
         ana6Label1 = new javax.swing.JLabel();
         ana1Label1 = new javax.swing.JLabel();
         ana2Label1 = new javax.swing.JLabel();
@@ -71,7 +84,7 @@ public class analysesFrame extends javax.swing.JFrame {
         ana8Label = new javax.swing.JLabel();
         ana5Label1 = new javax.swing.JLabel();
         ana9Label = new javax.swing.JLabel();
-        leutocytesLabel = new javax.swing.JLabel();
+        leucocytesLabel = new javax.swing.JLabel();
         hematiesLabel = new javax.swing.JLabel();
         hemoglobineLabel = new javax.swing.JLabel();
         hematocritesLabel = new javax.swing.JLabel();
@@ -80,7 +93,6 @@ public class analysesFrame extends javax.swing.JFrame {
         tcmhLabel = new javax.swing.JLabel();
         vihLabel = new javax.swing.JLabel();
         globulesBlancLabel = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         globulesBlancLab = new javax.swing.JLabel();
@@ -120,14 +132,17 @@ public class analysesFrame extends javax.swing.JFrame {
 
         patientLabel.setText("nom patient");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        demandesJList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "demandes" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
-
-        ana10Label.setText("jLabel12");
+        demandesJList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                demandesJListMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(demandesJList);
 
         ana6Label1.setText("C.C.M.H :");
 
@@ -147,25 +162,23 @@ public class analysesFrame extends javax.swing.JFrame {
 
         ana9Label.setText("Globules Blancs :");
 
-        leutocytesLabel.setText("leutocytes");
+        leucocytesLabel.setText("-");
 
-        hematiesLabel.setText("hematies");
+        hematiesLabel.setText("-");
 
-        hemoglobineLabel.setText("jLabel3");
+        hemoglobineLabel.setText("-");
 
-        hematocritesLabel.setText("jLabel4");
+        hematocritesLabel.setText("-");
 
-        vgmLabel.setText("jLabel5");
+        vgmLabel.setText("-");
 
-        ccmhLabel.setText("jLabel6");
+        ccmhLabel.setText("-");
 
-        tcmhLabel.setText("jLabel7");
+        tcmhLabel.setText("-");
 
-        vihLabel.setText("jLabel8");
+        vihLabel.setText("-");
 
-        globulesBlancLabel.setText("jLabel9");
-
-        jLabel10.setText("jLabel10");
+        globulesBlancLabel.setText("-");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -177,9 +190,9 @@ public class analysesFrame extends javax.swing.JFrame {
                     .addComponent(ana6Label1)
                     .addComponent(ana5Label1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vgmLabel)
-                    .addComponent(ccmhLabel))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vgmLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(ccmhLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
@@ -190,28 +203,26 @@ public class analysesFrame extends javax.swing.JFrame {
                         .addComponent(ana1Label1))
                     .addComponent(ana4Label1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hematocritesLabel)
-                            .addComponent(hematiesLabel)
-                            .addComponent(leutocytesLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ana8Label, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ana7Label, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ana10Label, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(hemoglobineLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hematiesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(leucocytesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(hemoglobineLabel)
-                        .addGap(55, 55, 55)
-                        .addComponent(ana9Label)))
+                        .addComponent(hematocritesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ana8Label, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ana7Label, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ana9Label, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tcmhLabel)
                     .addComponent(vihLabel)
-                    .addComponent(globulesBlancLabel)
-                    .addComponent(jLabel10))
-                .addContainerGap(171, Short.MAX_VALUE))
+                    .addComponent(globulesBlancLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +231,7 @@ public class analysesFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ana1Label1)
                     .addComponent(ana7Label)
-                    .addComponent(leutocytesLabel)
+                    .addComponent(leucocytesLabel)
                     .addComponent(tcmhLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -237,9 +248,7 @@ public class analysesFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ana4Label1)
-                    .addComponent(ana10Label)
-                    .addComponent(hematocritesLabel)
-                    .addComponent(jLabel10))
+                    .addComponent(hematocritesLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ana5Label1)
@@ -248,7 +257,7 @@ public class analysesFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ana6Label1)
                     .addComponent(ccmhLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -257,7 +266,7 @@ public class analysesFrame extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -553,7 +562,7 @@ public class analysesFrame extends javax.swing.JFrame {
         //Envoi des analyses
         for(int i = 0; i<listeAnalyses.size(); i++){
             System.out.println(listeAnalyses.get(i).getItem());
-            //analyseSB.insertAnalyse(listeAnalyses.get(i));
+            analyseSB.insertAnalyse(listeAnalyses.get(i));
         }
         
     }//GEN-LAST:event_newAnalyseButtonActionPerformed
@@ -618,6 +627,43 @@ public class analysesFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ccmhCBActionPerformed
 
+    private void demandesJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_demandesJListMouseClicked
+        int index = demandesJList.locationToIndex(evt.getPoint());
+        ListModel dlm = demandesJList.getModel();
+        String temp = (String) dlm.getElementAt(index);
+        
+        String[] parts = temp.split("/");
+        
+        //Remplisagge des résultats si résultats disponibles.
+        a.clear();
+        a = analyseSB.getAnalyses(Integer.parseInt(parts[0]));
+        
+        AffichageAnalyse();
+    }//GEN-LAST:event_demandesJListMouseClicked
+
+    private void AffichageAnalyse(){
+    
+        for(int i = 0; i<a.size(); i++){
+            switch(a.get(i).getItem()){
+                case "leucocytes" : leucocytesLabel.setText(a.get(i).getValeur());
+                break;
+                
+                case "hematies" : hematiesLabel.setText(a.get(i).getValeur());
+                break;
+                
+                case "hemoglobine" : hemoglobineLabel.setText(a.get(i).getValeur());
+                break;
+                
+                case "hematocrites" : hematocritesLabel.setText(a.get(i).getValeur());
+                break;
+                
+                case "vgm" : vgmLabel.setText(a.get(i).getValeur());
+                break;
+                
+                case "ccmh" : ccmhLabel.setText(a.get(i).getValeur());
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -655,7 +701,6 @@ public class analysesFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adresseLabel;
-    private javax.swing.JLabel ana10Label;
     private javax.swing.JLabel ana1Label;
     private javax.swing.JLabel ana1Label1;
     private javax.swing.JLabel ana2Label;
@@ -673,6 +718,7 @@ public class analysesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel ana9Label;
     private javax.swing.JCheckBox ccmhCB;
     private javax.swing.JLabel ccmhLabel;
+    private javax.swing.JList<String> demandesJList;
     private javax.swing.JCheckBox globulesBlancCB;
     private javax.swing.JLabel globulesBlancLab;
     private javax.swing.JLabel globulesBlancLabel;
@@ -684,8 +730,6 @@ public class analysesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hemoglobineLabel;
     private javax.swing.JTabbedPane informationsJPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -696,7 +740,7 @@ public class analysesFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JCheckBox leucocytesCB;
-    private javax.swing.JLabel leutocytesLabel;
+    private javax.swing.JLabel leucocytesLabel;
     private javax.swing.JButton modifyButton;
     private javax.swing.JButton newAnalyseButton;
     private javax.swing.JLabel nomLabel;

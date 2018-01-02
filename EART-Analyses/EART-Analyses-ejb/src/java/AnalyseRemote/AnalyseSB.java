@@ -81,7 +81,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             em.close();
             exit = true;
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("insertAnalyse" + e.getMessage());
         }
         return exit;
     }
@@ -95,12 +95,12 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        Query query = em.createQuery("UPDATE Analyses a SET valeur = "+anal.getValeur()+" WHERE a.RefDemande = "+anal.getRefDemande()+" AND a.item = "+anal.getItem()+"");
+        Exit = em.createQuery("UPDATE Analyses SET valeur = "+anal.getValeur()+" WHERE RefDemande = "+anal.getRefDemande()+", item = "+anal.getItem()+"").executeUpdate();
  
-        Exit = query.executeUpdate();
+        
         System.out.println("update SEND.");
         }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            System.out.println("updateAnalyse : " + ex.getMessage());
         }
         return Exit;
     }
@@ -129,7 +129,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             sendJMSMessageToAnalyseQueue(demande);
             
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("insertDemande :" + e.getMessage());
         }
         return ref;
     }
@@ -143,12 +143,12 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        Query query = em.createQuery("UPDATE Demande d SET Traitee = 1 WHERE d.id = "+demande.getId()+"");
+        Query query = em.createQuery("UPDATE Demande d SET Traitee = true WHERE d.id = "+demande.getId()+"");
  
         Exit = query.executeUpdate();
         System.out.println("update demande SEND.");
         }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            System.out.println("updateDemande : " + ex.getMessage());
         }
         return Exit;   
     }
@@ -174,6 +174,28 @@ public class AnalyseSB implements AnalyseSBRemote {
         return results;
     }
     
+    @Override 
+    public List<Demande> getDemandesPatient(int refPatient){
+    
+            
+        List<Demande> results = new ArrayList<>();
+
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            TypedQuery<Demande> query = em.createQuery("SELECT d FROM Demande d WHERE d.refPatient = "+refPatient+" ", Demande.class);
+            results = query.getResultList();
+
+            em.close();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return results;
+    }
+    
     @Override
     public List<Analyses> getAnalyses(int refDemande){
     
@@ -185,6 +207,27 @@ public class AnalyseSB implements AnalyseSBRemote {
             em.getTransaction().begin();
 
             TypedQuery<Analyses> query = em.createQuery("SELECT a FROM Analyses a WHERE a.refDemande = "+ refDemande +"", Analyses.class);
+            results = query.getResultList();
+
+            em.close();
+        
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return results;
+    }
+    
+    @Override
+    public List<Analyses> getAnalysesPatient(int refPatient){
+            List<Analyses> results = new ArrayList<>();
+
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            TypedQuery<Analyses> query = em.createQuery("SELECT a FROM Analyses a WHERE a.refPatient = "+ refPatient +"", Analyses.class);
             results = query.getResultList();
 
             em.close();

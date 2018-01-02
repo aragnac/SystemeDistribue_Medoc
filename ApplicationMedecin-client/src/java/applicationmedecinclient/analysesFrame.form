@@ -78,7 +78,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel5" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -106,18 +106,17 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="jList1">
+                <Component class="javax.swing.JList" name="demandesJList">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="demandes"/>
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="demandesJListMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -136,9 +135,9 @@
                               <Component id="ana5Label1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="vgmLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="ccmhLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="vgmLabel" pref="33" max="32767" attributes="0"/>
+                              <Component id="ccmhLabel" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -153,34 +152,32 @@
                               <Component id="ana4Label1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="hematocritesLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="hematiesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="leutocytesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="hemoglobineLabel" max="32767" attributes="0"/>
+                                      <Component id="hematiesLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="leucocytesLabel" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="ana8Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ana7Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ana10Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="hemoglobineLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="ana9Label" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hematocritesLabel" pref="41" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="ana8Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana7Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana9Label" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tcmhLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="vihLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="globulesBlancLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <Component id="tcmhLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="vihLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="globulesBlancLabel" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="171" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -191,7 +188,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ana1Label1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ana7Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="leutocytesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="leucocytesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tcmhLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -211,9 +208,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ana4Label1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ana10Label" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="hematocritesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -225,17 +220,12 @@
                               <Component id="ana6Label1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ccmhLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="119" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="ana10Label">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel12"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="ana6Label1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C.C.M.H :"/>
@@ -281,54 +271,49 @@
                     <Property name="text" type="java.lang.String" value="Globules Blancs :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="leutocytesLabel">
+                <Component class="javax.swing.JLabel" name="leucocytesLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="leutocytes"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="hematiesLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="hematies"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="hemoglobineLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel3"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="hematocritesLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel4"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="vgmLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel5"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="ccmhLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel6"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="tcmhLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel7"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="vihLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel8"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="globulesBlancLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel9"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel10">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel10"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
               </SubComponents>

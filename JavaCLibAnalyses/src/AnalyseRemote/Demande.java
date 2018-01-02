@@ -143,7 +143,7 @@ public class Demande implements Serializable {
 
     @Override
     public String toString() {
-        return "Num : " + id +", " + dateHeureDemande + ", Medecin : "+ refMedecin+", Urgent : " + urgent;
+        return "AnalyseRemote.Demande[ id=" + id + " ]";
     }
     
 }

@@ -21,11 +21,15 @@ public interface AnalyseSBRemote {
     
     List<Analyses> getAnalyses(int refDemande);
     
+    List<Analyses> getAnalysesPatient(int refPatient);
+    
     int insertDemande(Demande demande);
     
     int updateDemande(Demande demande);
     
     List<Demande> getDemandes();
+    
+    List<Demande> getDemandesPatient(int refPatient);
     
     void sendJMSMessageToAnalyseTopic(Object messageData);
     
