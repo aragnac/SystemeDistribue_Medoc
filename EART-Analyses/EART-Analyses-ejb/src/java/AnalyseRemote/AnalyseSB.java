@@ -93,10 +93,12 @@ public class AnalyseSB implements AnalyseSBRemote {
         try{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
         EntityManager em = emf.createEntityManager();
+        //em.persist(anal);
         em.getTransaction().begin();
         
-        Exit = em.createQuery("UPDATE Analyses SET valeur = "+anal.getValeur()+" WHERE RefDemande = "+anal.getRefDemande()+", item = "+anal.getItem()+"").executeUpdate();
- 
+        Exit = em.createQuery("UPDATE Analyses a SET a.valeur = '"+anal.getValeur()+"' WHERE a.item = '"+anal.getItem()+"' AND a.refDemande = "+anal.getRefDemande()+"").executeUpdate();
+        em.getTransaction().commit();
+        em.close();
         
         System.out.println("update SEND.");
         }catch(Exception ex){
@@ -104,6 +106,32 @@ public class AnalyseSB implements AnalyseSBRemote {
         }
         return Exit;
     }
+    
+      /*  @Override
+    public void UpdateAnalyse(int id, float valeur) 
+    {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaLibraryAnalysesPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        try
+        {
+            Analyses a = em.find(Analyses.class,id);
+            a.setValeur(valeur);
+
+            em.persist(a);
+            em.getTransaction().commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally
+        {
+            em.close();
+        }
+    }*/
 
     @Override
     public int insertDemande(Demande demande) {
@@ -143,7 +171,7 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        Query query = em.createQuery("UPDATE Demande d SET Traitee = true WHERE d.id = "+demande.getId()+"");
+        Query query = em.createQuery("UPDATE Demande SET traitee = true WHERE id = "+demande.getId()+"");
  
         Exit = query.executeUpdate();
         System.out.println("update demande SEND.");
@@ -274,7 +302,7 @@ public class AnalyseSB implements AnalyseSBRemote {
             System.out.println("Envoye sur le Topic.");
             //context.createProducer().send(analyseQueue, messageData);
         } catch (JMSException ex) {
-            System.out.println("Exception : " + ex);
+            System.out.println("Exception topic : " + ex);
         }
     }
     

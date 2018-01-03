@@ -143,7 +143,7 @@ public class Demande implements Serializable {
 
     @Override
     public String toString() {
-        return "AnalyseRemote.Demande[ id=" + id + " ]";
+        return "num :" + this.id + ", " + this.dateHeureDemande.toString() + ", Urgent : " + this.urgent;
     }
     
 }
