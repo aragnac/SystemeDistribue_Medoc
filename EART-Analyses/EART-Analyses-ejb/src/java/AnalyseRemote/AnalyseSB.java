@@ -69,12 +69,6 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        /*System.out.println(anal.getDateAnalyse());
-        System.out.println(anal.getRefDemande());
-        System.out.println(anal.getRefPatient());
-        System.out.println(anal.getItem());
-        System.out.println("valeur : " + anal.getValeur());*/
-        
         try{
             em.persist(anal);
             em.getTransaction().commit();
@@ -106,32 +100,6 @@ public class AnalyseSB implements AnalyseSBRemote {
         }
         return Exit;
     }
-    
-      /*  @Override
-    public void UpdateAnalyse(int id, float valeur) 
-    {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaLibraryAnalysesPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        
-        try
-        {
-            Analyses a = em.find(Analyses.class,id);
-            a.setValeur(valeur);
-
-            em.persist(a);
-            em.getTransaction().commit();
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-            em.getTransaction().rollback();
-        }
-        finally
-        {
-            em.close();
-        }
-    }*/
 
     @Override
     public int insertDemande(Demande demande) {
@@ -167,10 +135,11 @@ public class AnalyseSB implements AnalyseSBRemote {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        Query query = em.createQuery("UPDATE Demande SET traitee = true WHERE id = "+demande.getId()+"");
- 
-        Exit = query.executeUpdate();
-        System.out.println("update demande SEND.");
+        Exit = em.createQuery("UPDATE Demande SET traitee = true WHERE id = "+demande.getId()+"").executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        
+        System.out.println("updateDemande : update SEND.");
         }catch(Exception ex){
             System.out.println("updateDemande : " + ex.getMessage());
         }
@@ -302,11 +271,5 @@ public class AnalyseSB implements AnalyseSBRemote {
         }
     }
     
-   /* private EntityManagerFactory getEntityManagerFactory() {
-        if (emf == null) {
-            emf = Persistence.createEntityManagerFactory("JavaCLibAnalysePU");
-        }
-        return emf;
-    }*/
-    
+
 }
