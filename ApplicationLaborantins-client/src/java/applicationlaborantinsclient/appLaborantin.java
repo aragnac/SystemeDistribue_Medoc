@@ -48,19 +48,13 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
         connection = con; 
         session = sess;
         analyseSB = analysesb;
-        dlm = new DefaultListModel();
         
         try{
             consumer = sess.createConsumer(queue);
             consumer.setMessageListener(this);
             
-            List<Demande> d = analyseSB.getDemandes();
-
-            for(int i = 0; i < d.size(); i++)
-            {
-                dlm.addElement(d.get(i));
-            }
-            demandesList.setModel(dlm);
+            getDemandes();
+            
             
         }catch(JMSException ex){
             System.out.println("JMS error : " + ex);
@@ -82,15 +76,17 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
         demandesList = new javax.swing.JList<>();
         newDemandeRB = new javax.swing.JRadioButton();
         nbrDemandesLabel = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        actualiserButton = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nouvelle demande :");
+        jLabel1.setText("Nouvelle(s) demande(s) :");
 
         jLabel2.setText("Liste des demandes :");
 
         demandesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "demande1" };
+            String[] strings = { "Pas de demandes à traiter" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -105,6 +101,16 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
 
         nbrDemandesLabel.setText("0");
 
+        actualiserButton.setText("Actualiser");
+        actualiserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                actualiserButtonMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(actualiserButton);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,26 +124,26 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
                         .addComponent(nbrDemandesLabel)
                         .addGap(40, 40, 40)
                         .addComponent(newDemandeRB)
-                        .addGap(0, 351, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
-                .addGap(16, 16, 16))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(newDemandeRB)
                     .addComponent(nbrDemandesLabel))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,6 +158,22 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
         result.setVisible(true);
     }//GEN-LAST:event_demandesListMouseClicked
 
+    private void actualiserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualiserButtonMouseClicked
+        getDemandes();
+    }//GEN-LAST:event_actualiserButtonMouseClicked
+
+    public void getDemandes(){
+        dlm = new DefaultListModel();
+        
+        List<Demande> d = analyseSB.getDemandes();
+
+            for(int i = 0; i < d.size(); i++)
+            {
+                dlm.addElement(d.get(i));
+            }
+        demandesList.setModel(dlm);
+    }
+    
     @Override
     public void onMessage(Message message){
 
@@ -209,9 +231,11 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu actualiserButton;
     private javax.swing.JList<String> demandesList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nbrDemandesLabel;
     private javax.swing.JRadioButton newDemandeRB;

@@ -50,6 +50,61 @@ public class patientSB implements patientSBRemote {
 
         return results;
     }
+    
+    @Override
+    public int insertPatient(Patient p) {
+        int ref = 0;
+        
+        //On passe en parametre de emf le nom de la persitence unit
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibPatientPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin(); 
+        
+        try{  
+            em.persist(p);
+            em.getTransaction().commit();
+            //ref = p.getId();
+            System.out.println("numero patient :" + ref);
+            em.close();
+            
+        }catch(Exception e){
+            System.out.println("insertPatient :" + e.getMessage());
+        }
+        return ref;
+    }
+    
+    @Override 
+    public boolean updatePatient(Patient p){
+        boolean exit = false;
+                
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibPatientPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        try
+        {
+            Patient patient = em.find(Patient.class,p.getId());
+            patient.setNom(p.getNom());
+            patient.setPrenom(p.getPrenom());
+            patient.setAdresse(p.getAdresse());
+
+            em.persist(patient);
+            em.getTransaction().commit();
+            exit = true;
+        }
+        catch(Exception ex)
+        {
+            exit = false;
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally
+        {
+            em.close();
+        }
+        
+        return exit;
+    } 
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

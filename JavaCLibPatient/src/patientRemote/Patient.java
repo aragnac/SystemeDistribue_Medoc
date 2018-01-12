@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Patient.findById", query = "SELECT p FROM Patient p WHERE p.id = :id")
     , @NamedQuery(name = "Patient.findByNom", query = "SELECT p FROM Patient p WHERE p.nom = :nom")
     , @NamedQuery(name = "Patient.findByPrenom", query = "SELECT p FROM Patient p WHERE p.prenom = :prenom")
+    , @NamedQuery(name = "Patient.findByAdresse", query = "SELECT p FROM Patient p WHERE p.adresse = :adresse")
     , @NamedQuery(name = "Patient.findByLogin", query = "SELECT p FROM Patient p WHERE p.login = :login")})
 public class Patient implements Serializable {
 
@@ -50,6 +51,9 @@ public class Patient implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "prenom")
     private String prenom;
+    @Size(max = 50)
+    @Column(name = "adresse")
+    private String adresse;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
@@ -94,6 +98,14 @@ public class Patient implements Serializable {
         this.prenom = prenom;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -124,7 +136,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return nom + "  " + prenom;
+        return nom +" - " + prenom;
     }
     
 }

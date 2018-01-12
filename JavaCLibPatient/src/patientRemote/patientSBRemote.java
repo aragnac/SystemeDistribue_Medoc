@@ -16,5 +16,7 @@ import javax.ejb.Remote;
 public interface patientSBRemote {
 
     List<patientRemote.Patient> getPatients(String nom, String prenom);
+    int insertPatient(Patient p);
+    boolean updatePatient(Patient p);
     
 }

@@ -81,7 +81,7 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        addPatient = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -90,7 +90,7 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         jLabel1.setText("Rechercher un patient :");
 
         patientsJList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "nom prenom" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -127,7 +127,7 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         jLabel2.setText("Resultats disponibles :");
 
         resultatJList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Pas de résultats disponibles" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -179,8 +179,13 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
 
         showResultatJMItem.add(jMenu1);
 
-        jMenuItem3.setText("Ajout patient");
-        showResultatJMItem.add(jMenuItem3);
+        addPatient.setText("Ajout patient");
+        addPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPatientActionPerformed(evt);
+            }
+        });
+        showResultatJMItem.add(addPatient);
 
         jMenuItem4.setText("Resultats");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -202,9 +207,10 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
@@ -217,10 +223,8 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(9, 9, 9)
                                     .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(resultatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addComponent(resultatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,19 +266,34 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         ListModel dlm = patientsJList.getModel();
         Patient patient = (Patient) dlm.getElementAt(index);
         
-        analysesFrame anal = new analysesFrame(patient, analyseSB);
+        analysesFrame anal = new analysesFrame(patient, analyseSB, patientSB);
         anal.setVisible(true);
     }//GEN-LAST:event_patientsJListMouseClicked
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         resultatsPanel.setVisible(true);
-        this.setSize (375, 415);
+        this.setSize (470, 415);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void hideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hideButtonActionPerformed
         resultatsPanel.setVisible(false);
-        this.setSize (375, 312);
+        this.setSize (470, 312);
     }//GEN-LAST:event_hideButtonActionPerformed
+
+    private void addPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientActionPerformed
+        addPatientJDialog patientJD = new addPatientJDialog(this, true);
+        
+        if(patientJD.isOK() == true){
+            Patient p = new Patient();
+            p.setNom(patientJD.getNom());
+            p.setPrenom(patientJD.getPrenom());
+            p.setAdresse(patientJD.getAdresse());
+            p.setLogin(p.getNom() + p.getPrenom());
+            patientSB.insertPatient(p);
+        }
+        
+        patientJD.dispose();
+    }//GEN-LAST:event_addPatientActionPerformed
 
     @Override
     public void onMessage(Message message){
@@ -329,6 +348,7 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem addPatient;
     private javax.swing.JButton hideButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -337,7 +357,6 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

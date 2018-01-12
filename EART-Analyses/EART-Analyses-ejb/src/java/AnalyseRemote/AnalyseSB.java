@@ -143,10 +143,6 @@ public class AnalyseSB implements AnalyseSBRemote {
         em.getTransaction().begin(); 
         
         try{  
-            /*AnalyseRemote.Analyses a = new Analyses();
-            a.setItem(item);
-            a.setValeur(value);
-            a.setRefPatient(ref);*/
             demande.setTraitee(false);
             em.persist(demande);
             em.getTransaction().commit();

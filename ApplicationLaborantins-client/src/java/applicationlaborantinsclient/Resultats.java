@@ -42,11 +42,13 @@ public class Resultats extends javax.swing.JFrame {
      */
     public Resultats() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
     }
     
     public Resultats(Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
         initComponents();
+        this.setLocationRelativeTo(null);
         
         connection = con;
         session = sess;
