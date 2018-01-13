@@ -16,7 +16,8 @@ public class ApplicationPatientClient {
      */
     
     public static void main(String[] args) {
-        // TODO code application logic here
+        acceuil acc = new acceuil();
+        acc.setVisible(true);
     }
     
 }

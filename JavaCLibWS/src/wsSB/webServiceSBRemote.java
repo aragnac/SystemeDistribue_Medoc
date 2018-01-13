@@ -5,7 +5,9 @@
  */
 package wsSB;
 
+import java.util.List;
 import javax.ejb.Remote;
+import wsPackage.Analyses;
 
 /**
  *
@@ -13,5 +15,5 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface webServiceSBRemote {
-    
+    List<Analyses> getAnalyses(int refDemande);
 }

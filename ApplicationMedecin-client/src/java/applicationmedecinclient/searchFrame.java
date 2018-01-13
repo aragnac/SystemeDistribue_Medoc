@@ -7,6 +7,7 @@ package applicationmedecinclient;
 
 import AnalyseRemote.AnalyseSBRemote;
 import AnalyseRemote.Demande;
+import java.awt.Image;
 import java.util.List;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
@@ -40,13 +41,23 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
     }
     
     public searchFrame(patientSBRemote patientBean, AnalyseSBRemote analyseBean, Session sess, Topic topic) {
+        
+        try {
+            Image image=(new javax.swing.ImageIcon(getClass().getResource("/Images/sang.jpg"))).getImage();
+            this.setContentPane(new ImagePanel(image));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.pack();
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
         patientSB = patientBean;
         analyseSB = analyseBean;
         listPanel.setVisible(false);
         dlmResultat = new DefaultListModel();
-        resultatsPanel.setVisible(false);
+        resultatsPanel.setVisible(true);
         
         try{
             consumer = sess.createConsumer(topic);
@@ -87,6 +98,7 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("Rechercher un patient :");
 
         patientsJList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -148,12 +160,13 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
                 .addContainerGap()
                 .addGroup(resultatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(resultatsPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2))
-                    .addGroup(resultatsPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(hideButton))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addComponent(hideButton))
+                    .addGroup(resultatsPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         resultatsPanelLayout.setVerticalGroup(
             resultatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,14 +220,10 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel1))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(patientTF, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -222,14 +231,19 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
                                     .addGap(50, 50, 50))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(9, 9, 9)
-                                    .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(resultatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                                    .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel1)))
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(resultatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(161, 161, 161))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,9 +251,9 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
                 .addComponent(searchButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resultatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,12 +286,12 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         resultatsPanel.setVisible(true);
-        this.setSize (470, 415);
+        //this.setSize (470, 415);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void hideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hideButtonActionPerformed
         resultatsPanel.setVisible(false);
-        this.setSize (470, 312);
+        //this.setSize (470, 312);
     }//GEN-LAST:event_hideButtonActionPerformed
 
     private void addPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientActionPerformed

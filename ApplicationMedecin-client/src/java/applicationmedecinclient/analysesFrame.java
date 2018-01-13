@@ -9,6 +9,7 @@ import AnalyseRemote.AnalyseSBRemote;
 import AnalyseRemote.Analyses;
 import java.util.Calendar;
 import AnalyseRemote.Demande;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -40,9 +41,17 @@ public class analysesFrame extends javax.swing.JFrame {
     }
     
     public analysesFrame(Patient pat, AnalyseSBRemote analyseBean, patientSBRemote patientBean) {
+        try {
+            Image image=(new javax.swing.ImageIcon(getClass().getResource("/Images/metal.jpg"))).getImage();
+            this.setContentPane(new ImagePanel(image));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.pack();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setResizable(false);
        
         patient = pat;
         analyseSB = analyseBean;
@@ -140,6 +149,8 @@ public class analysesFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        patientLabel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        patientLabel.setForeground(new java.awt.Color(255, 255, 255));
         patientLabel.setText("nom patient");
 
         demandesJList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -221,7 +232,7 @@ public class analysesFrame extends javax.swing.JFrame {
                             .addComponent(leucocytesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(hematocritesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addComponent(hematocritesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(20, 20, 20)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ana8Label, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -384,7 +395,7 @@ public class analysesFrame extends javax.swing.JFrame {
                     .addComponent(hemoglobineCB)
                     .addComponent(leucocytesCB)
                     .addComponent(hematiesCB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(analysesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newAnalyseButton)
                     .addGroup(analysesJPanelLayout.createSequentialGroup()
@@ -400,7 +411,7 @@ public class analysesFrame extends javax.swing.JFrame {
                             .addComponent(vihCB)
                             .addComponent(rdwCB)
                             .addComponent(globulesBlancCB))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         analysesJPanelLayout.setVerticalGroup(
             analysesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +509,7 @@ public class analysesFrame extends javax.swing.JFrame {
                     .addComponent(adresseTF))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(268, Short.MAX_VALUE)
+                .addContainerGap(231, Short.MAX_VALUE)
                 .addComponent(modifyButton)
                 .addGap(257, 257, 257))
         );
@@ -529,13 +540,13 @@ public class analysesFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(patientLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(informationsJPanel)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(patientLabel)
+                .addGap(247, 247, 247))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,7 +555,7 @@ public class analysesFrame extends javax.swing.JFrame {
                 .addComponent(patientLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(informationsJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();

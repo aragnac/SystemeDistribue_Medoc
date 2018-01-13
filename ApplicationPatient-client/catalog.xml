@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/WSResultat/WSResultat" uri="xml-resources/web-service-references/WSResultat/wsdl/localhost_8080/WSResultat/WSResultat.xml"/>
+    <system systemId="http://localhost:8080/WSResultat/WSResultat?wsdl" uri="xml-resources/web-service-references/WSResultat/wsdl/localhost_8080/WSResultat/WSResultat.wsdl"/>
+    <system systemId="http://localhost:8080/WSResultat/WSResultat?xsd=1" uri="xml-resources/web-service-references/WSResultat/wsdl/localhost_8080/WSResultat/WSResultat.xsd_1.xsd"/>
 </catalog>
