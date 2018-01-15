@@ -8,6 +8,7 @@
             <included-library dirs="200">reference.JavaCLibAnalyses.jar</included-library>
             <included-library dirs="200">reference.Tools.jar</included-library>
             <included-library dirs="200">reference.JavaCLibLog.jar</included-library>
+            <included-library dirs="200">file.reference.mysql-connector-java-5.1.44-bin.jar</included-library>
             <source-roots>
                 <root id="src.dir" name="Source Packages"/>
             </source-roots>
