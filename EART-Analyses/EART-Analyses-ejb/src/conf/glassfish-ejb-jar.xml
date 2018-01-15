@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glassfish-ejb-jar PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 EJB 3.1//EN" "http://glassfish.org/dtds/glassfish-ejb-jar_3_1-1.dtd">
+<!--<as-context>
+    <auth-method>USERNAME_PASSWORD</auth-method>
+    <realm-name>jdbcRealm</realm-name>
+    <form-login-config>
+        <form-login-page></form-login-page>
+    </form-login-config>
+</as-context>-->
+<glassfish-ejb-jar>
+    <security-role-mapping>
+        <role-name>laborantin</role-name>
+        <group-name>laborantin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>medecin</role-name>
+        <group-name>medecin</group-name>
+    </security-role-mapping>
+  <enterprise-beans/>
+</glassfish-ejb-jar>

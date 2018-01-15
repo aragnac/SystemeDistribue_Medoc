@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="changeme" default="all" basedir=".">
+    <target name="create-medoc-pool" description="create JDBC connection pool">
+        <antcall target="create-jdbc-connection-pool">
+            <param name="pool.name" value="medecinPool" />
+        </antcall>
+    </target>
+    
+    <target name="create-medoc-resource" depends="create-medoc-pool" description="create JDBC resource">
+        <antcall target="create-jdbc-resource">
+            <param name="pool.name" value="medecinPool" />
+            <param name="jdbc.resource.name" value="jdbc/DB_MEDOC" />
+        </antcall>
+    </target>
+    
+    <target name="create-medoc-realm" depends="create-medoc-resource"
+        description="create JDBC realm">
+        <antcall target="create-jdbc-realm">
+            <param name="jdbc.resource.name" value="jdbc/DB_MEDOC" />
+            <param name="jdbc.realm.name" value="jdbcRealm" />
+            <param name="user.table.name" value="DB_MEDOC.MEDECIN" />
+            <param name="user.name.column" value="login" />
+            <param name="password.column" value="password" />
+            <param name="group.name" value="MEDECIN" />
+            <param name="assign.groups" value="MEDECIN" />
+            <param name="digest.algorithm" value="MD5" />
+        </antcall>
+    </target>
+</project>

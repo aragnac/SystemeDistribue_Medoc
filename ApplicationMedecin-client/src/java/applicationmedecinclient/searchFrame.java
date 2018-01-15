@@ -266,7 +266,8 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         listPanel.setVisible(true);
         
         String[] parts = patientTF.getText().split(" ");
-        List<Patient> p = patientSB.getPatients(parts[0], parts[1]);
+        
+        List<Patient> p = patientSB.getPatients(parts[0], parts.length >= 2 ? parts[1] : " ");
 
         for(int i = 0; i < p.size(); i++)
         {

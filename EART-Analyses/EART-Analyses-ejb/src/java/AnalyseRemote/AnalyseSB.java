@@ -8,6 +8,8 @@ package AnalyseRemote;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
@@ -29,6 +31,8 @@ import javax.persistence.TypedQuery;
  * @author Nicolas
  */
 @Stateless
+@DeclareRoles({"laborantin","medecin"})
+@RolesAllowed({"laborantin","medecin"})
 public class AnalyseSB implements AnalyseSBRemote {
 
     @Resource(mappedName = "jms/analyseTopic")

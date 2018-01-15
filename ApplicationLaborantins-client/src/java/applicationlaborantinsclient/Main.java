@@ -50,8 +50,8 @@ public class Main {
             
             //Run login frame
             Login login = new Login();
-            login.setVisible(true);
-            
+            // login.setVisible(true);
+          
             //login.dispose();
             
             //Run mainframe
