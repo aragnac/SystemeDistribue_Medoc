@@ -30,6 +30,10 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="/applicationPatientWEB/CSS/split.css" type="text/css" media="screen" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <!-- Load the required components. -->
+        <script src="https://js.braintreegateway.com/web/3.28.0/js/client.min.js"></script>
+        <script src="https://js.braintreegateway.com/web/3.28.0/js/paypal-checkout.min.js"></script>
 
 </head>
 
@@ -64,6 +68,61 @@ List<Analyses> listeAnal = (List<Analyses>) request.getAttribute("ListeAnalyses"
                     }
                     out.println("</div>");
                     }%>
+                    <div id="paypal-button"></div>
+
+                    <script>
+                      paypal.Button.render({
+                        env: 'sandbox', // Or 'production',
+
+                        commit: true, // Show a 'Pay Now' button
+
+                        style: {
+                          color: 'gold',
+                          size: 'small'
+                        },
+
+                        payment: function() {
+                          /* 
+                           * Set up the payment here 
+                           */
+                            // Set up a url on your server to create the payment
+                            var CREATE_URL = 'http://aragnac.pythonanywhere.com/payment/create';
+                            // Make a call to your server to set up the payment
+                            return paypal.request.post(CREATE_URL).then(function(res) {
+                                return res.paymentID;
+                            });
+                        },
+
+                        onAuthorize: function(data, actions) {
+                          /* 
+                           * Execute the payment here 
+                           */
+                          // Set up a url on your server to execute the payment
+                            var EXECUTE_URL = 'http://aragnac.pythonanywhere.com/payment/execute';
+                            // Set up the data you need to pass to your server
+                            var data = {
+                                paymentID: data.paymentID,
+                                payerID: data.payerID
+                            };
+                            // Make a call to your server to execute the payment
+                            return paypal.request.post(EXECUTE_URL, data).then(function (res) {
+                                console.log(res);
+                                window.alert("payment executed");
+                            });
+                        },
+                        onCancel: function(data, actions) {
+                        /* 
+                         * Buyer cancelled the payment 
+                         */
+                      },
+
+                      onError: function(err) {
+                        /* 
+                         * An error occurred during the transaction 
+                         */
+                      }
+                    }, '#paypal-button');
+                  </script>
                 </div>
                 <div class="split-lists">
                     <div class="split-list">
@@ -92,7 +151,7 @@ List<Analyses> listeAnal = (List<Analyses>) request.getAttribute("ListeAnalyses"
                     </div>
 		</div>
                 <div class="split-credit">
-                    <p>&copy;2017 <a href="#">Your Name</a> - <a href="https://onepagelove.com/split">Split Template</a> by <a href="https://onepagelove.com">One Page Love</a></p>
+                    <p>&copy;2017 <a href="#">BNSF@Lab</a> - <a href="https://onepagelove.com/split">Split Template</a> by <a href="https://onepagelove.com">One Page Love</a></p>
 
 				<!-- 
 				To edit this credit you can remove the CC3.0 license for only $5 here: https://onepagelove.com/split 

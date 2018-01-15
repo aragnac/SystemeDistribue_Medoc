@@ -28,6 +28,8 @@ public class logSB implements logSBRemote {
         em.getTransaction().begin(); 
         
         try{  
+            System.out.println("dans InsertLOG");
+            System.out.println("log recu :" + log.getInfos());
             em.persist(log);
             em.getTransaction().commit();
             em.close();
