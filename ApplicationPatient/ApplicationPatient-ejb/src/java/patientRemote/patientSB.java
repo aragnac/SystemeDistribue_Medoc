@@ -108,4 +108,21 @@ public class patientSB implements patientSBRemote {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    @Override
+    public List<Patient> getPatientById(int id) {
+        List<patientRemote.Patient> results = new ArrayList<>();
+        
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibPatientPU");// JavaCLibPatientPU
+                EntityManager em = emf.createEntityManager();
+                em.getTransaction().begin();
+
+                TypedQuery<patientRemote.Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.id = "+id+"", Patient.class);
+                results = query.getResultList();
+
+                em.close();
+
+
+        return results;
+    }
 }

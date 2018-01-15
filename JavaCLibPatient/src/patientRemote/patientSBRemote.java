@@ -18,5 +18,6 @@ public interface patientSBRemote {
     List<patientRemote.Patient> getPatients(String nom, String prenom);
     int insertPatient(Patient p);
     boolean updatePatient(Patient p);
+    List<Patient> getPatientById(int id);
     
 }

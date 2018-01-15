@@ -55,7 +55,6 @@ public class MDBLog implements MessageListener {
         long difference = c1.getTime().getTime() - c2.getTime().getTime();
         Calendar c3 = Calendar.getInstance();
         c3.setTimeInMillis(difference);
-        //sessionBeanLog.AddLog
         String string = ("La duree de traitement de l'analyse " + dem.getId() + " a ete de " + TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS) + "h" + c3.getTime().getMinutes());
         Logs log = new Logs();
         log.setInfos(string);

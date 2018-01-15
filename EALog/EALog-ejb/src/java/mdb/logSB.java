@@ -23,7 +23,7 @@ public class logSB implements logSBRemote {
             int ref = 0;
         
         //On passe en parametre de emf le nom de la persitence unit
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibAnalysesPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaCLibLogPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin(); 
         
@@ -33,7 +33,7 @@ public class logSB implements logSBRemote {
             em.close();
             
         }catch(Exception e){
-            System.out.println("insertDemande :" + e.getMessage());
+            System.out.println("insertLog :" + e.getMessage());
         }
         return ref;
     }

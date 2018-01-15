@@ -8,6 +8,7 @@ package applicationmedecinclient;
 import AnalyseRemote.AnalyseSBRemote;
 import AnalyseRemote.Demande;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
@@ -318,7 +319,9 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
             ObjectMessage objMessage = (ObjectMessage) message;
             Demande dem = (Demande) objMessage.getObject();
             System.out.println("Demande id : " + dem.getId());
-            dlmResultat.addElement(dem);
+            List<Patient> lp = new ArrayList<Patient>();
+            lp = patientSB.getPatientById(dem.getRefPatient());
+            dlmResultat.addElement("Résultats disponibles pour : " + lp.get(0));
             resultatJList.setModel(dlmResultat);
             
  
