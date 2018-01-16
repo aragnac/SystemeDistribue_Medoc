@@ -31,19 +31,6 @@ public class ServletResultats extends HttpServlet {
         ws.WSResultat_Service service = new ws.WSResultat_Service();
         port = service.getWSResultatPort();
     }
-    
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -57,13 +44,17 @@ public class ServletResultats extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String type = request.getParameter("type");
-        int numDemande = Integer.parseInt(request.getParameter("numDemande"));
-        
-        if(type.equals("resultats")){
-            request.setAttribute("ListeAnalyses", port.getAnalyses(numDemande));
+        System.out.println("|||||WEB type: " + type);
+        if (type != null)
+        {
+            int numDemande = Integer.parseInt(request.getParameter("numDemande"));
+
+            if(type.equals("resultats")){
+                request.setAttribute("ListeAnalyses", port.getAnalyses(numDemande));
+            }
+
+            request.getRequestDispatcher("/JSP/resultatsJSP.jsp").forward(request, response);
         }
-        
-        request.getRequestDispatcher("/JSP/resultatsJSP.jsp").forward(request, response);
     }
 
     /**
