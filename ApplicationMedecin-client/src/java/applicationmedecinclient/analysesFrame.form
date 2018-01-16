@@ -115,9 +115,7 @@
                 <Component class="javax.swing.JList" name="demandesJList">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="demandes"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -134,30 +132,15 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="ana6Label1" min="-2" max="-2" attributes="0"/>
-                              <Component id="ana5Label1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="vgmLabel" pref="33" max="32767" attributes="0"/>
-                              <Component id="ccmhLabel" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="ana3Label1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="ana2Label1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ana1Label1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="ana4Label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="ana3Label1" min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="ana4Label1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana2Label1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana1Label1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -184,6 +167,22 @@
                               <Component id="globulesBlancLabel" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="ana6Label1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana5Label1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="vgmLabel" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="ccmhLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -226,7 +225,7 @@
                               <Component id="ana6Label1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ccmhLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="119" max="32767" attributes="0"/>
+                          <EmptySpace pref="126" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -363,22 +362,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="ana3Label" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="ana6Label" min="-2" max="-2" attributes="0"/>
                                   <Component id="ana5Label" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="ana2Label" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ana1Label" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="ana4Label" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="ana4Label" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="ana3Label" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="ana2Label" min="-2" max="-2" attributes="0"/>
+                              <Component id="ana1Label" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -389,83 +381,81 @@
                               <Component id="leucocytesCB" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="hematiesCB" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="134" max="32767" attributes="0"/>
+                          <EmptySpace pref="115" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="newAnalyseButton" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tcmhLab" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="vihLab" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdwLab" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="globulesBlancLab" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="urgentRB" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tcmhLab" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tcmhCB" min="-2" max="-2" attributes="0"/>
-                                      <Component id="vihCB" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdwCB" min="-2" max="-2" attributes="0"/>
-                                      <Component id="globulesBlancCB" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="vihCB" pref="93" max="32767" attributes="0"/>
+                                      <Component id="globulesBlancCB" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tcmhCB" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="167" max="32767" attributes="0"/>
+                          <EmptySpace pref="168" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="ana1Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tcmhLab" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="leucocytesCB" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tcmhCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="tcmhCB" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="leucocytesCB" max="32767" attributes="0"/>
+                                  <Component id="tcmhLab" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="ana1Label" min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="ana2Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="hematiesCB" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="vihLab" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="vihCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="hematiesCB" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="vihLab" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="vihCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="ana2Label" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="rdwLab" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdwCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="globulesBlancCB" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="hemoglobineCB" max="32767" attributes="0"/>
+                                          <Component id="ana3Label" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="globulesBlancLab" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="ana4Label" min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="hematocritesCB" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="globulesBlancLab" min="-2" max="-2" attributes="0"/>
-                                      <Component id="globulesBlancCB" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="ana3Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="hemoglobineCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ana5Label" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="vgmCB" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="ana4Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="hematocritesCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ccmhCB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ana6Label" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="ana5Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="vgmCB" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="ana6Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ccmhCB" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace pref="12" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="urgentRB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="newAnalyseButton" min="-2" max="-2" attributes="0"/>
@@ -519,46 +509,21 @@
                     <Property name="text" type="java.lang.String" value="V.G.M :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="rdwLab">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="RDW :"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="leucocytesCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leucocytesCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hematiesCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hematiesCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hemoglobineCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hemoglobineCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="hematocritesCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hematocritesCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="vgmCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vgmCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="ccmhCB">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ccmhCBActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="tcmhCB">
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="vihCB">
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="rdwCB">
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="globulesBlancCB">
                 </Component>
@@ -607,7 +572,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="231" max="32767" attributes="0"/>
+                      <EmptySpace pref="302" max="32767" attributes="0"/>
                       <Component id="modifyButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
                   </Group>

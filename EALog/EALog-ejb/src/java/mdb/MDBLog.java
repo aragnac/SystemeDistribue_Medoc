@@ -44,23 +44,25 @@ public class MDBLog implements MessageListener {
     @Override
     public void onMessage(Message message) {
         try{
-        ObjectMessage objMessage = (ObjectMessage) message;
-        Demande dem = (Demande) objMessage.getObject();
-        System.out.println("MDB : " + dem.getId());
-        
-        Calendar c1 = new GregorianCalendar();
-        Calendar c2 = Calendar.getInstance();
-        c2.setTime(dem.getDateHeureDemande());
+            ObjectMessage objMessage = (ObjectMessage) message;
+            Demande dem = (Demande) objMessage.getObject();
+            System.out.println("------ MDB : " + dem.getId());
 
-        long difference = c1.getTime().getTime() - c2.getTime().getTime();
-        Calendar c3 = Calendar.getInstance();
-        c3.setTimeInMillis(difference);
-        String string = ("La duree de traitement de l'analyse " + dem.getId() + " a ete de " + TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS) + "h" + c3.getTime().getMinutes());
-        Logs log = new Logs();
-        log.setInfos(string);
-        logSB.insertLog(log);
+            Calendar c1 = new GregorianCalendar();
+            Calendar c2 = Calendar.getInstance();
+            c2.setTime(dem.getDateHeureDemande());
+
+            long difference = c1.getTime().getTime() - c2.getTime().getTime();
+            Calendar c3 = Calendar.getInstance();
+            c3.setTimeInMillis(difference);
+            String string = ("La duree de traitement de l'analyse " + dem.getId() + " a ete de " + TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS) + "h" + c3.getTime().getMinutes());
+            System.out.println("----- String: " + string);
+            Logs log = new Logs();
+            log.setInfos(string);
+            logSB.insertLog(log);
                 
         }catch(Exception ex){
+            System.out.println("== == == == ==Exception onMessage()");
             System.out.println(ex.getMessage());
         }
     }

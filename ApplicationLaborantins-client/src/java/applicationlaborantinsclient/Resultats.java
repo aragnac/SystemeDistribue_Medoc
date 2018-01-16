@@ -5,37 +5,39 @@
  */
 package applicationlaborantinsclient;
 
-import AnalyseRemote.AnalyseSBRemote;
-import AnalyseRemote.Analyses;
-import AnalyseRemote.Demande;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.jms.Topic;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import AnalyseRemote.AnalyseSBRemote;
+import AnalyseRemote.Analyses;
+import AnalyseRemote.Demande;
+import com.sun.xml.ws.util.StringUtils;
 
 /**
- *
  * @author Nicolas
  */
 public class Resultats extends javax.swing.JFrame {
 
     private static AnalyseSBRemote analyseSB;
-    
+
     private Topic topic = null;
     private Connection connection = null;
     private Session session = null;
     private Demande demande = null;
     private MessageProducer producer = null;
     private DefaultListModel dlm;
-    private Analyses anal;
     private List<Analyses> listAnal;
+
 
     /**
      * Creates new form Resultats
@@ -43,38 +45,7 @@ public class Resultats extends javax.swing.JFrame {
     public Resultats() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-    }
-    
-    public Resultats(Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        
-        connection = con;
-        session = sess;
-        analyseSB = analyseBean;
-        demande = dem;
-        dlm = new DefaultListModel();
-        listAnal = new ArrayList<>();
 
-        
-        try{
-            producer = session.createProducer(topic);
-            demandeLabel.setText(Integer.toString(demande.getId()));
-            medecinLabel.setText(Integer.toString(demande.getRefMedecin()));
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            
-            List<Analyses> a = analyseSB.getAnalyses(demande.getId());
-
-            for(int i = 0; i < a.size(); i++)
-            {
-                dlm.addElement(a.get(i));
-            }
-            analysesJList.setModel(dlm);
-        }
-        catch(JMSException ex){
-          JOptionPane.showMessageDialog(null, "JMS Error : " + ex.getMessage());  
-        }
     }
 
     /**
@@ -103,11 +74,9 @@ public class Resultats extends javax.swing.JFrame {
         ana7Label = new javax.swing.JLabel();
         ana8Label = new javax.swing.JLabel();
         ana9Label = new javax.swing.JLabel();
-        ana10Label = new javax.swing.JLabel();
         tcmhTF = new javax.swing.JTextField();
         vihTF = new javax.swing.JTextField();
         globulesblancTF = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
         sendButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         demandeLabel = new javax.swing.JLabel();
@@ -120,91 +89,51 @@ public class Resultats extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ana1Label.setText("Leucocytes :");
+        ana1Label.setEnabled(false);
 
         ana2Label.setText("Hématies :");
+        ana2Label.setEnabled(false);
 
         ana3Label.setText("Hémoglobine :");
+        ana3Label.setEnabled(false);
 
         ana4Label.setText("Hématocrites :");
+        ana4Label.setEnabled(false);
 
         ana5Label.setText("V.G.M :");
+        ana5Label.setEnabled(false);
 
         patientLabel.setText("Demande numero :");
 
         ana6Label.setText("C.C.M.H :");
+        ana6Label.setEnabled(false);
 
-        leucocytesTF.setText("value");
-        leucocytesTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                leucocytesTFFocusLost(evt);
-            }
-        });
+        leucocytesTF.setEnabled(false);
 
-        hematiesTF.setText("value");
-        hematiesTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                hematiesTFFocusLost(evt);
-            }
-        });
+        hematiesTF.setEnabled(false);
 
-        hemoglobineTF.setText("value");
-        hemoglobineTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                hemoglobineTFFocusLost(evt);
-            }
-        });
+        hemoglobineTF.setEnabled(false);
 
-        hematocritesTF.setText("value");
-        hematocritesTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                hematocritesTFFocusLost(evt);
-            }
-        });
+        hematocritesTF.setEnabled(false);
 
-        vgmTF.setText("value");
-        vgmTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                vgmTFFocusLost(evt);
-            }
-        });
+        vgmTF.setEnabled(false);
 
-        ccmhTF.setText("value");
-        ccmhTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ccmhTFFocusLost(evt);
-            }
-        });
+        ccmhTF.setEnabled(false);
 
         ana7Label.setText("T.C.M.H :");
+        ana7Label.setEnabled(false);
 
         ana8Label.setText("V.I.H :");
+        ana8Label.setEnabled(false);
 
         ana9Label.setText("Globules blanc :");
+        ana9Label.setEnabled(false);
 
-        ana10Label.setText("jLabel12");
+        tcmhTF.setEnabled(false);
 
-        tcmhTF.setText("value");
-        tcmhTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tcmhTFFocusLost(evt);
-            }
-        });
+        vihTF.setEnabled(false);
 
-        vihTF.setText("value");
-        vihTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                vihTFFocusLost(evt);
-            }
-        });
-
-        globulesblancTF.setText("value");
-        globulesblancTF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                globulesblancTFFocusLost(evt);
-            }
-        });
-
-        jTextField10.setText("value");
+        globulesblancTF.setEnabled(false);
 
         sendButton.setText("Envoyer");
         sendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +166,7 @@ public class Resultats extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(demandeLabel)
@@ -246,34 +175,33 @@ public class Resultats extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(medecinLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ana6Label)
-                                    .addComponent(ana4Label)
-                                    .addComponent(ana3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ana2Label)
-                                    .addComponent(ana1Label)
-                                    .addComponent(ana5Label))
-                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(ana6Label)
+                                        .addComponent(ana4Label)
+                                        .addComponent(ana2Label)
+                                        .addComponent(ana1Label)
+                                        .addComponent(ana5Label))
+                                    .addComponent(ana3Label, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(hematocritesTF)
                                     .addComponent(vgmTF)
                                     .addComponent(ccmhTF)
-                                    .addComponent(hemoglobineTF)
                                     .addComponent(hematiesTF)
-                                    .addComponent(leucocytesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(leucocytesTF, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                                    .addComponent(hemoglobineTF))
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(ana8Label)
                                     .addComponent(ana9Label)
-                                    .addComponent(ana10Label)
                                     .addComponent(ana7Label))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vihTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tcmhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(globulesblancTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(25, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(globulesblancTF, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                                    .addComponent(vihTF)
+                                    .addComponent(tcmhTF))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sendButton)
@@ -325,11 +253,7 @@ public class Resultats extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ana9Label)
-                                    .addComponent(globulesblancTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ana10Label)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(globulesblancTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(sendButton))
                     .addComponent(jScrollPane1))
@@ -340,92 +264,106 @@ public class Resultats extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-
-        try{
+        try {
             //Ajout du resultat de l'analyse à la DB
             //analyseSB.insertAnalyse("item", "value", 2);
-            for(int i = 0; i< listAnal.size() ; i++){
-                analyseSB.updateAnalyse( listAnal.get(i));
+            JTextField[] textField = {leucocytesTF, hematiesTF, hemoglobineTF, hematocritesTF, vgmTF, ccmhTF, tcmhTF, vihTF, globulesblancTF};
+            String[] values = {"leucocytes", "hematies", "hemoglobine", "hematocrites", "vgm", "ccmh", "tcmh", "vih", "globulesblanc"};
+            for (int i = 0, textFieldLength = textField.length; i < textFieldLength; i++) {
+                JTextField tf = textField[i];
+                if (tf.isEnabled())
+                    listAnal.add(createAnalyse(values[i], tf.getText()));
             }
+
+            for (int i = 0; i < listAnal.size(); i++) {
+                analyseSB.updateAnalyse(listAnal.get(i));
+            }
+
             analyseSB.updateDemande(demande);
             analyseSB.sendJMSMessageToAnalyseTopic(demande);
             JOptionPane.showMessageDialog(null, "Resultats de l'analyse envoyés.");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "JMS Error : "+ex.getMessage()); 
+            dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "JMS Error : " + ex.getMessage());
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 
-    private void leucocytesTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_leucocytesTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("leucocytes");
-        anal.setValeur(leucocytesTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_leucocytesTFFocusLost
+    private Analyses createAnalyse(String item, String value) {
+        Analyses temp = new Analyses();
+        temp.setRefDemande(demande.getId());
+        temp.setItem(item);
+        temp.setValeur(value);
+        return temp;
+    }
 
-    private void hematiesTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hematiesTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("hemoglobine");
-        anal.setValeur(hemoglobineTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_hematiesTFFocusLost
+    public Resultats(Session sess, Connection con, AnalyseSBRemote analyseBean, Demande dem) {
+        initComponents();
+        this.setLocationRelativeTo(null);
 
-    private void hemoglobineTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hemoglobineTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("hemoglobine");
-        anal.setValeur(hemoglobineTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_hemoglobineTFFocusLost
+        connection = con;
+        session = sess;
+        analyseSB = analyseBean;
+        demande = dem;
+        dlm = new DefaultListModel();
+        listAnal = new ArrayList<>();
 
-    private void hematocritesTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hematocritesTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("hematocrites");
-        anal.setValeur(hematocritesTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_hematocritesTFFocusLost
 
-    private void vgmTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vgmTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("vgm");
-        anal.setValeur(vgmTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_vgmTFFocusLost
+        try {
+            producer = session.createProducer(topic);
+            demandeLabel.setText(Integer.toString(demande.getId()));
+            medecinLabel.setText(Integer.toString(demande.getRefMedecin()));
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-    private void ccmhTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ccmhTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("ccmh");
-        anal.setValeur(ccmhTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_ccmhTFFocusLost
+            List<Analyses> a = analyseSB.getAnalyses(demande.getId());
 
-    private void tcmhTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tcmhTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("tcmh");
-        anal.setValeur(tcmhTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_tcmhTFFocusLost
-
-    private void vihTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vihTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("vih");
-        anal.setValeur(vihTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_vihTFFocusLost
-
-    private void globulesblancTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_globulesblancTFFocusLost
-        anal = new Analyses();
-        anal.setRefDemande(demande.getId());
-        anal.setItem("globulesblanc");
-        anal.setValeur(globulesblancTF.getText());
-        listAnal.add(anal);
-    }//GEN-LAST:event_globulesblancTFFocusLost
+            for (int i = 0; i < a.size(); i++) {
+                switch (a.get(i).getItem()) {
+                    case "leucocytes":
+                        ana1Label.setEnabled(true);
+                        leucocytesTF.setEnabled(true);
+                        break;
+                    case "hematies":
+                        ana2Label.setEnabled(true);
+                        hematiesTF.setEnabled(true);
+                        break;
+                    case "hemoglobine":
+                        ana3Label.setEnabled(true);
+                        hemoglobineTF.setEnabled(true);
+                        break;
+                    case "hematocrites":
+                        ana4Label.setEnabled(true);
+                        hematocritesTF.setEnabled(true);
+                        break;
+                    case "vgm":
+                        ana5Label.setEnabled(true);
+                        vgmTF.setEnabled(true);
+                        break;
+                    case "ccmh":
+                        ana6Label.setEnabled(true);
+                        ccmhTF.setEnabled(true);
+                        break;
+                    case "tcmh":
+                        ana7Label.setEnabled(true);
+                        tcmhTF.setEnabled(true);
+                        break;
+                    case "vih":
+                        ana8Label.setEnabled(true);
+                        vihTF.setEnabled(true);
+                        break;
+                    case "globulesblanc":
+                        ana9Label.setEnabled(true);
+                        globulesblancTF.setEnabled(true);
+                        break;
+                    default:
+                        break;
+                }
+                dlm.addElement(StringUtils.capitalize(a.get(i).getItem()));
+            }
+            analysesJList.setModel(dlm);
+        } catch (JMSException ex) {
+            JOptionPane.showMessageDialog(null, "JMS Error : " + ex.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -435,7 +373,7 @@ public class Resultats extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -458,14 +396,13 @@ public class Resultats extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new Resultats().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ana10Label;
     private javax.swing.JLabel ana1Label;
     private javax.swing.JLabel ana2Label;
     private javax.swing.JLabel ana3Label;
@@ -485,7 +422,6 @@ public class Resultats extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField leucocytesTF;
     private javax.swing.JLabel medecinLabel;
     private javax.swing.JLabel patientLabel;

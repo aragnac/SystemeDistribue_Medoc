@@ -52,10 +52,8 @@ public class appLaborantin extends javax.swing.JFrame implements MessageListener
         try{
             consumer = sess.createConsumer(queue);
             consumer.setMessageListener(this);
-            
             getDemandes();
-            
-            
+                       
         }catch(JMSException ex){
             System.out.println("JMS error : " + ex);
         }

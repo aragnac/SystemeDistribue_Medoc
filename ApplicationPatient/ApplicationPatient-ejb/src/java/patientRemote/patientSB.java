@@ -64,11 +64,11 @@ public class patientSB implements patientSBRemote {
             em.persist(p);
             em.getTransaction().commit();
             //ref = p.getId();
-            System.out.println("numero patient :" + ref);
+            System.out.println("MESSAGE: Numero patient :" + ref);
             em.close();
             
         }catch(Exception e){
-            System.out.println("insertPatient :" + e.getMessage());
+            System.out.println("MESSAGE: insertPatient :" + e.getMessage());
         }
         return ref;
     }

@@ -90,9 +90,6 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         hideButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         showResultatJMItem = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         addPatient = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -182,16 +179,6 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
         );
 
         showResultatJMItem.setText("Options");
-
-        jMenu1.setText("Connection");
-
-        jMenuItem1.setText("Login");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Logout");
-        jMenu1.add(jMenuItem2);
-
-        showResultatJMItem.add(jMenu1);
 
         addPatient.setText("Ajout patient");
         addPatient.addActionListener(new java.awt.event.ActionListener() {
@@ -370,11 +357,8 @@ public class searchFrame extends javax.swing.JFrame implements MessageListener {
     private javax.swing.JButton hideButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

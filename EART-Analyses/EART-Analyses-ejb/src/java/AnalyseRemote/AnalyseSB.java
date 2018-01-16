@@ -31,8 +31,8 @@ import javax.persistence.TypedQuery;
  * @author Nicolas
  */
 @Stateless
-@DeclareRoles({"laborantin","medecin"})
-@RolesAllowed({"laborantin","medecin"})
+//@DeclareRoles({"laborantin","medecin"})
+//@RolesAllowed({"laborantin","medecin"})
 public class AnalyseSB implements AnalyseSBRemote {
 
     @Resource(mappedName = "jms/analyseTopic")
@@ -173,8 +173,6 @@ public class AnalyseSB implements AnalyseSBRemote {
     
     @Override 
     public List<Demande> getDemandesPatient(int refPatient){
-    
-            
         List<Demande> results = new ArrayList<>();
 
         try{
